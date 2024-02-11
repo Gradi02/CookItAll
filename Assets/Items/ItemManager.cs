@@ -13,9 +13,10 @@ public class ItemManager : MonoBehaviour
 
 
     //Funkcja podnoszenia przedmiotu
-    private void PickUpItem(GameObject player)
+    private void PickUpItem()
     {
 
+        DestroyItem();
     }
 
 
