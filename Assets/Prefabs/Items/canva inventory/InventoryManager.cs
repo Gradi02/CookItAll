@@ -62,8 +62,8 @@ public class InventoryManager : MonoBehaviour
         if(slotToDst != null)
         {
             slots.Remove(slotToDst);
+            selector.RemoveSlot(slotToDst);
             Destroy(slotToDst);
-
         }
     }
 
