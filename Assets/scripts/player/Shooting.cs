@@ -5,15 +5,10 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Interacting : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
-	//INTERAKCJA
-	private Camera playerCamera;
-	public float maxDistance = 5f;
-	public TextMeshProUGUI info;
-
-
 	//STRZELANIE
+	private Camera playerCamera;
 	public GameObject knife;
 	private float shootSpeed = 50f;
 	private float drag = 2;
@@ -29,30 +24,6 @@ public class Interacting : MonoBehaviour
 	{
 		if (playerCamera != null)
 		{
-			Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-			RaycastHit hit;
-
-			if (Physics.Raycast(ray, out hit, maxDistance))
-			{
-				if (hit.collider != null)
-				{
-					//POKAZ INFO ZE MOZESZ COS ZROBIC
-					info.color = new Color(255,255,255,1);
-					info.text = "E - To Destroy";
-
-					if (Input.GetKeyDown(KeyCode.E))
-					{
-						Destroy(hit.collider.gameObject);
-					}
-				}
-			}
-			else
-			{
-				info.color = new Color(255, 255, 255, 0);
-			}
-
-
-
 			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				Vector3 pos = playerCamera.transform.position + playerCamera.transform.forward * 2f;

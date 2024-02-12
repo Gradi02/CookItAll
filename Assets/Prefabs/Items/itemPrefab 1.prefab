@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 28195034667651786}
   - component: {fileID: 6537302931672914086}
   m_Layer: 6
-  m_Name: itemPrefab
+  m_Name: itemPrefab 1
   m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa36d474dd730b45986b0984e418f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: cd7d9f1ec258d6647b921c11ff99e424, type: 2}
+  item: {fileID: 11400000, guid: d4221488f8319224abd04985c3d8a833, type: 2}
 --- !u!54 &6537302931672914086
 Rigidbody:
   m_ObjectHideFlags: 0

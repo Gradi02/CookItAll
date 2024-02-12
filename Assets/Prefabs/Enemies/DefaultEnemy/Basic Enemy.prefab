@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4034528189830718066}
   - component: {fileID: 6477380789380369348}
   - component: {fileID: 4243116972173806139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Basic Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,4 +166,3 @@ MonoBehaviour:
   lootTableItem: {fileID: 7610128828999373149, guid: bd6fec7307c836c479d916edc150cefb,
     type: 3}
   lootChance: 100
-  ItemsHolder: {fileID: 0}
