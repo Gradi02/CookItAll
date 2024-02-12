@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ItemsHolder
   - knife
+  - item
+  - inv
   layers:
   - Default
   - TransparentFX
