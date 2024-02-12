@@ -82,7 +82,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     {
         float rand = Random.Range(0f, 100f);
 
-        if (rand <= lootChance)
+        if (rand <= lootChance && lootTableItem != null)
         {
             GameObject item = Instantiate(lootTableItem, transform.position, Quaternion.identity, ItemsHolder);
             item.GetComponent<Rigidbody>().AddForce(3*transform.up, ForceMode.Impulse);
