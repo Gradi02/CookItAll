@@ -16,6 +16,13 @@ public class ItemSelecting : MonoBehaviour
         itemsSlots.Add(s);
     }
 
+    public void RemoveSlot(GameObject s)
+    {
+        itemsSlots.Remove(s);
+        maxSlot = 3 + itemsSlots.Count;
+        selectedSlot = (selectedSlot - 1 + maxSlot) % maxSlot;
+    }
+
     private void Update()
     {
         if(player == null)
