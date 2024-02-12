@@ -7,9 +7,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject slotPrefab;
     private List<GameObject> slots = new List<GameObject>();
     private ItemSlotManager tempSlot = null;
+    private ItemSelecting selector;
 
-
-
+    private void Awake()
+    {
+        selector = transform.parent.GetComponent<ItemSelecting>();
+    }
 
 
 
@@ -26,6 +29,7 @@ public class InventoryManager : MonoBehaviour
             GameObject new_slot = Instantiate(slotPrefab, transform.position, Quaternion.identity, transform);
             new_slot.GetComponent<ItemSlotManager>().SetItem(item);
             slots.Add(new_slot);
+            selector.AddSlot(new_slot);
         }
     }
 
@@ -59,6 +63,7 @@ public class InventoryManager : MonoBehaviour
         {
             slots.Remove(slotToDst);
             Destroy(slotToDst);
+
         }
     }
 

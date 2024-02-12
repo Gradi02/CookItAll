@@ -12,8 +12,8 @@ public class Shooting : MonoBehaviour
 	public GameObject knife;
 	private float shootSpeed = 50f;
 	private float drag = 2;
-
-
+	private bool handSelected = true;
+	public GameObject hand;
 
 	private void Start()
 	{
@@ -22,7 +22,7 @@ public class Shooting : MonoBehaviour
 
 	void Update()
 	{
-		if (playerCamera != null)
+		if (playerCamera != null && handSelected)
 		{
 			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
@@ -40,5 +40,11 @@ public class Shooting : MonoBehaviour
 			}
 		}
 	}
+
+	public void SetSelection(bool sin)
+    {
+		handSelected = sin;
+		hand.SetActive(sin);
+    }
 }
 

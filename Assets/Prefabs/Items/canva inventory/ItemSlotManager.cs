@@ -51,4 +51,9 @@ public class ItemSlotManager : MonoBehaviour
             transform.parent.GetComponent<InventoryManager>().DestroySlotRequest(this);
         }
     }
+
+    public ItemScriptableObject GetItem()
+    {
+        return item;
+    }
 }
