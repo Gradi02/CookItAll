@@ -7,4 +7,5 @@ public class ItemScriptableObject : ScriptableObject
 {
     public string item_name;
     public Sprite item_image;
+    public GameObject item_model;
 }
