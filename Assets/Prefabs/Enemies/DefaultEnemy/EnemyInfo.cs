@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyInfo : MonoBehaviour // potencjalnie interfejs
+public class EnemyInfo : MonoBehaviour, IknifeInteraction
 {
     [Header("Basic Info")]
     [SerializeField] private float health = 20;
@@ -46,7 +46,11 @@ public class EnemyInfo : MonoBehaviour // potencjalnie interfejs
         CheckForDeath();
     }
 
-
+    //wywo³ana przez interfejs gdy trafi ten obiekt no¿em
+    public void knifeInteract()
+    {
+        DamageEnemy(10);
+    }
 
 
 
