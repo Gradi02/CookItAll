@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class Microwave : MonoBehaviour
 {
+	private RecipesManager rpmanager;
 	private List<ItemScriptableObject> ItemsList = new();
 
 	public List<GameObject> dishes = new();
@@ -15,7 +16,12 @@ public class Microwave : MonoBehaviour
 	private bool usable = true;
 	private bool cooking = false;
 
-	private void OnTriggerEnter(Collider item)
+    private void Start()
+    {
+		rpmanager = GameObject.FindGameObjectWithTag("manager").GetComponent<RecipesManager>();
+    }
+
+    private void OnTriggerEnter(Collider item)
 	{
 		// Sprawdzamy, czy obiekt, który wszed³ w obszar wyzwalacza, ma tag "Player".
 		if (item.CompareTag("item") && usable == true)
@@ -29,10 +35,19 @@ public class Microwave : MonoBehaviour
 
 		if (item.CompareTag("knife") && cooking == false)
 		{
-			StartCoroutine(CookingTime());
+			Recipes rp = rpmanager.CheckForRecipes(ItemsList);
+
+			if(rp != null)
+            {
+				StartCoroutine(CookingTime(rp.product));
+			}
+			else
+            {
+				Debug.Log("brak przepisu");
+            }
 		}
 	}
-	private IEnumerator CookingTime()
+	private IEnumerator CookingTime(GameObject product)
 	{
 		cooking = true;
 		usable = false;

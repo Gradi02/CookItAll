@@ -73,4 +73,9 @@ public class ItemSelecting : MonoBehaviour
             itemsSlots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
     }
+
+    public int GetSelectedSlot()
+    {
+        return selectedSlot;
+    }
 }

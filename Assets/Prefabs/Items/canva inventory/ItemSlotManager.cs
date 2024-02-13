@@ -48,12 +48,17 @@ public class ItemSlotManager : MonoBehaviour
 
         if (itemCount <= 0)
         {
-            transform.parent.GetComponent<InventoryManager>().DestroySlotRequest(this);
+            transform.parent.GetComponent<InventoryManager>().DestroySlotRequest(this.gameObject);
         }
     }
 
     public ItemScriptableObject GetItem()
     {
         return item;
+    }
+
+    public int GetItemCount()
+    {
+        return itemCount;
     }
 }

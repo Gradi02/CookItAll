@@ -64,7 +64,7 @@ public class ItemThrow : MonoBehaviour
                 item.GetComponent<Rigidbody>().AddForce(pos * power, ForceMode.Impulse);
                 item.GetComponent<Rigidbody>().AddTorque(0.3f * transform.right + 0.2f * transform.forward, ForceMode.Impulse);
 
-                GameObject.FindGameObjectWithTag("inv").GetComponent<InventoryManager>().RemoveItemFromInv(selectedItem);
+                GameObject.FindGameObjectWithTag("inv").GetComponent<InventoryManager>().RemoveItemFromInv();
 
                 selectedItem = null;
                 item = null;

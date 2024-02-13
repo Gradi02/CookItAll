@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTransform: {fileID: 1445852244}
   power: 10
-  itemHolder: {fileID: 0}
+  itemHolder: {fileID: 601072172}
 --- !u!1 &1042139276
 GameObject:
   m_ObjectHideFlags: 0

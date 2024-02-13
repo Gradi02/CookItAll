@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fork
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c124110da8128ae4581edea2e5545d20,
+        type: 3}
+      propertyPath: m_TagString
+      value: knife
+      objectReference: {fileID: 0}
     - target: {fileID: 1364974133809703462, guid: c124110da8128ae4581edea2e5545d20,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
