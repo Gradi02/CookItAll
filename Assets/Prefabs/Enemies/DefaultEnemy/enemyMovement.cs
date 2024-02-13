@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class enemyMovement : MonoBehaviour
 {
     private Transform target;
-    [SerializeField] private float speed;
+    [SerializeField] private NavMeshAgent agent;
 
-    
     void FixedUpdate()
     {
         if (target != null)
         {
-            Vector3 targetPosition = target.transform.position - transform.position;
-
-            transform.position += targetPosition * Time.fixedDeltaTime * speed;
+            agent.SetDestination(target.position);
         }
         else
         {
