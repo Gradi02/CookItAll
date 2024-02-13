@@ -13,6 +13,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
 
     [Header("References")]
     private Transform ItemsHolder;
+    private culdronManager culdronManager;
 
 
 
@@ -52,7 +53,10 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
         DamageEnemy(10);
     }
 
-
+    public void SetManager(culdronManager m)
+    {
+        culdronManager = m;
+    }
 
 
 
@@ -73,6 +77,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     private void DestroyEnemy()
     {
         //particle i inne
+        culdronManager.RemoveEnemyFromList(gameObject);
         Destroy(gameObject);
     }
 
@@ -84,8 +89,9 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
 
         if (rand <= lootChance && lootTableItem != null)
         {
-            GameObject item = Instantiate(lootTableItem, transform.position, Quaternion.identity, ItemsHolder);
+            GameObject item = Instantiate(lootTableItem, transform.position + new Vector3(0, 2, 0), Quaternion.identity, ItemsHolder);
             item.GetComponent<Rigidbody>().AddForce(3*transform.up, ForceMode.Impulse);
+            item.GetComponent<Rigidbody>().AddTorque(0.3f * transform.right + 0.2f * transform.forward, ForceMode.Impulse);
         }
     }
 }
