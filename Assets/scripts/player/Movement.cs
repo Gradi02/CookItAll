@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 	private float moveSpeed = 7f;		 //PREDKOSC
 	private float maxSpeed = 7.5f;		 //MAKS bo przez Force predkosc sie zwieksza
 	private float drag = 5f;			 //ograniczenie slizgania sie przez force
-	private float jumpforce = 5f;		 //moc skoku
+	private float jumpforce = 1f;		 //moc skoku
 	public Transform orientation;
 	Vector3 moveDIrection;
 
@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
 		{
 			Jump();
 		}
-    }
+	}
 	
 	private void KeyInput()
 	{
@@ -68,6 +68,6 @@ public class Movement : MonoBehaviour
 	{
 		// SprawdŸ, czy postaæ jest na ziemi (na podstawie niewielkiego przesuniêcia od dolnej krawêdzi collidera)
 		float distanceToGround = GetComponent<Collider>().bounds.extents.y;
-		return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
+		return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.05f);
 	}
 }

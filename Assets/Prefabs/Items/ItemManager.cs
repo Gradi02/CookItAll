@@ -41,4 +41,10 @@ public class ItemManager : MonoBehaviour
     {
         return item.item_name;
     }
-}
+
+
+     public ItemScriptableObject GetItem()
+     {
+        return item;
+     }
+ }
