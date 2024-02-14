@@ -125,7 +125,7 @@ MonoBehaviour:
   freezeTime: 10
   shootsToFreeze: 3
   enemiesPrefabs: []
-  spawnerPrefab: {fileID: 8626769538263104739, guid: d52500f060ce52548a4fa428ac5502f5,
+  spawnerPrefab: {fileID: 2305776168965118563, guid: 5c8fd9967eaa84141b15847baae57bfc,
     type: 3}
   spawningPos: {fileID: 1891944769697671491}
 --- !u!1 &6424452059703242909
