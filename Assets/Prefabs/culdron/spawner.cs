@@ -8,6 +8,10 @@ public class spawner : MonoBehaviour
     private culdronManager culdronManager;
     private bool sp = false;
 
+    private void Awake()
+    {
+        GetComponent<Animator>().SetBool("glut", true);
+    }
     public void SetEnemy(GameObject enemy, culdronManager mng)
     {
         enemyToSpawn = enemy;
