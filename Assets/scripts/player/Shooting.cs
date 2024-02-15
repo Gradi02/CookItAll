@@ -11,9 +11,10 @@ public class Shooting : MonoBehaviour
 {
 	//STRZELANIE
 	private Camera playerCamera;
-	public GameObject knife;
-	private float shootSpeed = 50f;
+	private float shootSpeed =40f;
 	private float drag = 2;
+
+	public GameObject[] weaponsBasicSet;
 
 
 	//REKA
@@ -24,7 +25,6 @@ public class Shooting : MonoBehaviour
 	//AMMO
 	private int ammo = 7;
 	private int Maxammo = 7;
-	private float tick;
 	public TextMeshProUGUI ammotxt;
 	public TextMeshProUGUI ammoWarning;
 	public Slider ammoSlider;
@@ -83,12 +83,12 @@ public class Shooting : MonoBehaviour
 					StartCoroutine(Cooldown());
 					ammo--;
 					Vector3 pos = playerCamera.transform.position + playerCamera.transform.forward * 2f;
-					GameObject Knife = Instantiate(knife, pos, Quaternion.identity);
+					GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], pos, Quaternion.identity);
 					Rigidbody krb = Knife.GetComponent<Rigidbody>();
 
 					// ¯EBY DOBRZE LECIA£O
 					Knife.transform.LookAt(pos + playerCamera.transform.forward);
-					Knife.transform.Rotate(Vector3.up, 90f);
+					Knife.transform.Rotate(Vector3.up, 180f);
 
 					// NAPIERDAAALAAAAAJ!!!!!!
 					krb.AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
