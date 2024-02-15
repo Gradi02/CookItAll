@@ -54,7 +54,7 @@ public class Microwave : MonoBehaviour
 		gameObject.GetComponent<Animator>().SetBool("cooking", true);
 		yield return new WaitForSeconds(5f);
 		gameObject.GetComponent<Animator>().SetBool("cooking", false);
-		ready = Instantiate(dishes[1], dish.transform.position, Quaternion.identity);
+		ready = Instantiate(product, dish.transform.position, Quaternion.identity);
 		ItemsList.Clear();
 		gameObject.GetComponent<Animator>().Play("microwave_open");
 		gameObject.GetComponent<SphereCollider>().enabled = false;

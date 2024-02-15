@@ -156,7 +156,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: caa086b7b9b3ff24093dbd652f141d5c,
         type: 3}
       propertyPath: m_Name
-      value: strawberry
+      value: tomatoe
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: caa086b7b9b3ff24093dbd652f141d5c,
         type: 3}
