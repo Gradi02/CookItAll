@@ -5,13 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Microwave : MonoBehaviour
+public class Microwave : MonoBehaviour, IknifeInteraction
 {
 	private RecipesManager rpmanager;
 	private List<ItemScriptableObject> ItemsList = new();
 
-	public List<GameObject> dishes = new();
-	public GameObject dish;
+	public Transform dish;
 	private GameObject ready;
 	private bool usable = true;
 	private bool cooking = false;
@@ -20,6 +19,23 @@ public class Microwave : MonoBehaviour
     {
 		rpmanager = GameObject.FindGameObjectWithTag("manager").GetComponent<RecipesManager>();
     }
+
+	public void knifeInteract()
+    {
+		if (cooking == false)
+		{
+			Recipes rp = rpmanager.CheckForRecipes(ItemsList);
+
+			if (rp != null)
+			{
+				StartCoroutine(CookingTime(rp.product));
+			}
+			else
+			{
+				Debug.Log("brak przepisu");
+			}
+		}
+	}
 
     private void OnTriggerEnter(Collider item)
 	{
@@ -32,20 +48,6 @@ public class Microwave : MonoBehaviour
 
 			Debug.Log(ItemsList.Count);
 		}
-
-		if (item.CompareTag("knife") && cooking == false)
-		{
-			Recipes rp = rpmanager.CheckForRecipes(ItemsList);
-
-			if(rp != null)
-            {
-				StartCoroutine(CookingTime(rp.product));
-			}
-			else
-            {
-				Debug.Log("brak przepisu");
-            }
-		}
 	}
 	private IEnumerator CookingTime(GameObject product)
 	{
@@ -54,10 +56,10 @@ public class Microwave : MonoBehaviour
 		gameObject.GetComponent<Animator>().SetBool("cooking", true);
 		yield return new WaitForSeconds(5f);
 		gameObject.GetComponent<Animator>().SetBool("cooking", false);
-		ready = Instantiate(product, dish.transform.position, Quaternion.identity);
+		ready = Instantiate(product, dish.position, Quaternion.identity);
 		ItemsList.Clear();
 		gameObject.GetComponent<Animator>().Play("microwave_open");
-		gameObject.GetComponent<SphereCollider>().enabled = false;
+		gameObject.GetComponent<BoxCollider>().enabled = false;
 		cooking = false;
 	}
 
@@ -66,7 +68,7 @@ public class Microwave : MonoBehaviour
 		if(ready == null && usable == false && cooking == false)
 		{
 			usable = true;
-			gameObject.GetComponent<SphereCollider>().enabled = true;
+			gameObject.GetComponent<BoxCollider>().enabled = true;
 			gameObject.GetComponent<Animator>().Play("microwave_close");
 		}
 	}

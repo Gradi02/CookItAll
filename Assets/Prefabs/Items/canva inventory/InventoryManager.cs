@@ -19,11 +19,12 @@ public class InventoryManager : MonoBehaviour
 
 
     //Funkcja ¿e przedmiot zosta³ podniesiony
-    public void PickUpItem(ItemScriptableObject item)
+    public bool PickUpItem(ItemScriptableObject item)
     {
         if(CheckIfSlotExist(item))
         {
             tempSlot.AddItem();
+            return true;
         }
         else
         {
@@ -33,10 +34,12 @@ public class InventoryManager : MonoBehaviour
                 new_slot.GetComponent<ItemSlotManager>().SetItem(item);
                 slots.Add(new_slot);
                 selector.AddSlot(new_slot);
+                return true;
             }
             else
             {
                 Debug.Log("brak miejsca na wiêcej itemów");
+                return false;
             }
         }
     }
