@@ -11,9 +11,9 @@ public class Shooting : MonoBehaviour
 {
 	//STRZELANIE
 	private Camera playerCamera;
-	private float shootSpeed =40f;
-	private float drag = 2;
-
+	private float shootSpeed =60f;
+	private float drag = 1;
+	public Transform knifeSpawnPos;
 	public GameObject[] weaponsBasicSet;
 
 
@@ -47,13 +47,7 @@ public class Shooting : MonoBehaviour
 			
 		}
 
-		if (ammo == 0 && IsReloading==false)
-		{
-			ammoWarning.text = "LMB TO RELOAD!";
-			ammoWarning.color = new Color(255, 255, 255, 1);
-		}
-
-		if (ammo == 0 && IsReloading == true)
+		if (IsReloading == true)
 		{
 			ammoWarning.text = "RELOADING";
 			ammoWarning.color = new Color(255, 255, 255, 1);
@@ -68,31 +62,41 @@ public class Shooting : MonoBehaviour
 
 		if (playerCamera != null && handSelected)
 		{
-			if (Input.GetKeyDown(KeyCode.Mouse0))
+			if (Input.GetKeyDown(KeyCode.Mouse0) && !IsReloading)
 			{
-				if(ammo == 0)
-				{
-					if (IsReloading == false)
-					{
-						StartCoroutine(Reload());
-					}
-				}
-
 				if (ammo > 0 && ShootCooldown == false)
 				{
 					StartCoroutine(Cooldown());
 					ammo--;
-					Vector3 pos = playerCamera.transform.position + playerCamera.transform.forward * 2f;
-					GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], pos, Quaternion.identity);
+					//Vector3 pos = playerCamera.transform.position + playerCamera.transform.forward * 2f;
+					GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], knifeSpawnPos.position, Quaternion.identity);
 					Rigidbody krb = Knife.GetComponent<Rigidbody>();
 
 					// ¯EBY DOBRZE LECIA£O
-					Knife.transform.LookAt(pos + playerCamera.transform.forward);
+					Vector3 direction = playerCamera.transform.forward;
+					Quaternion targetRotation = Quaternion.LookRotation(direction);
+					Knife.transform.rotation = targetRotation;
 					Knife.transform.Rotate(Vector3.up, 180f);
 
 					// NAPIERDAAALAAAAAJ!!!!!!
 					krb.AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
 					krb.drag = drag;
+				}
+			}
+
+			if(Input.GetKeyDown(KeyCode.R) && ammo < Maxammo)
+            {
+				if (IsReloading == false)
+				{
+					StartCoroutine(Reload());
+				}
+			}
+
+			if (ammo <= 0)
+			{
+				if (IsReloading == false)
+				{
+					StartCoroutine(Reload());
 				}
 			}
 		}

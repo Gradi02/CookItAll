@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9102117403313577056, guid: c2ec378b1ac184341833a4bbcf3b0f92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8812528941401185217, guid: c2ec378b1ac184341833a4bbcf3b0f92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ec378b1ac184341833a4bbcf3b0f92,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,6 +68,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8553417584757162366, guid: c2ec378b1ac184341833a4bbcf3b0f92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -629392271669159207, guid: c2ec378b1ac184341833a4bbcf3b0f92,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -67,6 +82,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: spoon 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c2ec378b1ac184341833a4bbcf3b0f92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c2ec378b1ac184341833a4bbcf3b0f92,
         type: 3}

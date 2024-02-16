@@ -5,6 +5,7 @@ using UnityEngine;
 public class knifeManager : MonoBehaviour
 {
 	private float maxDistance = 1f;
+	private bool hitted = false;
 	public void Update()
 	{
 		Ray ray = new Ray(gameObject.transform.position, -gameObject.transform.forward);
@@ -12,17 +13,31 @@ public class knifeManager : MonoBehaviour
 
 		if (Physics.Raycast(ray, out hit, maxDistance))
 		{
-			Debug.Log(hit.point);
-			Freeze(hit.collider, hit.point);
+			IknifeInteraction interaction = hit.collider.GetComponent<IknifeInteraction>();
+			if (interaction == null && !hitted && !hit.transform.CompareTag("item"))
+			{
+				hitted = true;
+				gameObject.GetComponent<BoxCollider>().enabled = false;
+				gameObject.GetComponent<Rigidbody>().useGravity = false;
+				gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+				gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+				gameObject.transform.position = hit.point + transform.forward * 0.2f;
+				Destroy(gameObject, 10f);
+			}
 		}
-
 	}
 
 	public void OnTriggerEnter(Collider other)
     {
         if(other != null)
         {
-			Freeze(other, Vector3.zero);
+			IknifeInteraction interaction = other.GetComponent<IknifeInteraction>();
+
+			if (interaction != null)
+			{
+				interaction.knifeInteract();
+				Destroy(gameObject);
+			}
 		}
     }
 
@@ -35,12 +50,15 @@ public class knifeManager : MonoBehaviour
 			interaction.knifeInteract();
 			Destroy(gameObject);
 		}
-		gameObject.GetComponent<BoxCollider>().enabled = false;
-		gameObject.GetComponent<Rigidbody>().useGravity = false;
-		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-		gameObject.GetComponent<Rigidbody>().freezeRotation = true;
-		gameObject.transform.position = pos + transform.forward * 0.2f;
-		Destroy(gameObject, 10f);
+		else
+		{
+			gameObject.GetComponent<BoxCollider>().enabled = false;
+			gameObject.GetComponent<Rigidbody>().useGravity = false;
+			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+			gameObject.transform.position = pos + transform.forward * 0.2f;
+			Destroy(gameObject, 10f);
+		}
 	}
 
 }

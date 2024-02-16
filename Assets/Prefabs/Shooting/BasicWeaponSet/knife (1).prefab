@@ -58,10 +58,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8553417584757162366, guid: 038686d9f93939e4bab9da241444f2fb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5896588202177574662, guid: 038686d9f93939e4bab9da241444f2fb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 038686d9f93939e4bab9da241444f2fb,
         type: 3}
       propertyPath: m_Name
       value: knife (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 038686d9f93939e4bab9da241444f2fb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 038686d9f93939e4bab9da241444f2fb,
         type: 3}

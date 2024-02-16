@@ -20,8 +20,10 @@ public class ItemManager : MonoBehaviour
     {
         if (inv_manager != null)
         {
-            inv_manager.PickUpItem(item);
-            DestroyItem();
+            if (inv_manager.PickUpItem(item))
+            {
+                DestroyItem();
+            }
         }
         else
         {
