@@ -5,8 +5,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-	private float moveSpeed = 7f;		 //PREDKOSC
-	private float maxSpeed = 7.5f;		 //MAKS bo przez Force predkosc sie zwieksza
+	private float moveSpeed = 5f;		 //PREDKOSC
+	private float maxSpeed = 5.5f;		 //MAKS bo przez Force predkosc sie zwieksza
 	private float drag = 5f;			 //ograniczenie slizgania sie przez force
 	private float jumpforce = 1f;		 //moc skoku
 	public Transform orientation;
