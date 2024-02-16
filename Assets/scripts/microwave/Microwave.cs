@@ -10,6 +10,8 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 	private RecipesManager rpmanager;
 	private List<ItemScriptableObject> ItemsList = new();
 
+	public ParticleSystem PS;
+
 	public Transform dish;
 	private GameObject ready;
 	private bool usable = true;
@@ -54,7 +56,9 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 		cooking = true;
 		usable = false;
 		gameObject.GetComponent<Animator>().SetBool("cooking", true);
+		PS.gameObject.SetActive(true);
 		yield return new WaitForSeconds(5f);
+		PS.gameObject.SetActive(false);
 		gameObject.GetComponent<Animator>().SetBool("cooking", false);
 		ready = Instantiate(product, dish.position, Quaternion.identity);
 		ItemsList.Clear();

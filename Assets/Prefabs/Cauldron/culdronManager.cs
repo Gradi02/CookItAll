@@ -85,6 +85,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
         {
             yield return new WaitForSeconds(middleSpawnCooldown);
             GameObject glut = Instantiate(spawnerPrefab, spawningPos.position, Quaternion.identity);
+            gameObject.GetComponentInChildren<Animator>().Play("spawning");
 
             //losuje parametry rzucenia
             float randomAngle = Random.Range(0f, Mathf.PI * 2f);
