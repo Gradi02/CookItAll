@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
         {
             float distance = Vector3.Distance(this.gameObject.transform.position, target.position);
 
-            if (distance > 1)
+            if (distance > 3)
             {
                 anim.SetBool("walk", true);
 
@@ -57,6 +57,7 @@ public class EnemyMovement : MonoBehaviour
             else
             {
                 anim.SetBool("walk", false);
+                anim.Play("attack");
             }
         }
     }
