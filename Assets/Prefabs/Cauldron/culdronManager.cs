@@ -10,6 +10,8 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
     [SerializeField] private int minEnemies = 3;
     [SerializeField] private float freezeTime = 10;
     [SerializeField] private int shootsToFreeze = 3;
+    [SerializeField] private int MinEnemiesToSpawn = 2;
+    [SerializeField] private int MaxEnemiesToSpawn = 3;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject[] enemiesPrefabs; //prefaby dla danego levela
@@ -32,7 +34,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
     private void Awake()
     {
         canSpawn = false;
-        StartCoroutine(SpawnEnemies(5));
+        StartCoroutine(SpawnEnemies(3));
     }
 
 
@@ -60,7 +62,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
             freeze = true;
             canSpawn = false;
             unfreeze = Time.time + freezeTime;
-            StartCoroutine(SpawnEnemies(Random.Range(2, 5)));
+            StartCoroutine(SpawnEnemies(Random.Range(MinEnemiesToSpawn, MaxEnemiesToSpawn)));
         }
 
         if(Time.time > unfreeze && freeze)
@@ -72,7 +74,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
         if(canSpawn && !freeze)
         {
             canSpawn = false;
-            StartCoroutine(SpawnEnemies(Random.Range(2,5)));
+            StartCoroutine(SpawnEnemies(Random.Range(MinEnemiesToSpawn, MaxEnemiesToSpawn)));
         }
     }
 
@@ -89,7 +91,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
 
             //losuje parametry rzucenia
             float randomAngle = Random.Range(0f, Mathf.PI * 2f);
-            float randomRadius = Random.Range(3, 6);
+            float randomRadius = Random.Range(2, 6);
             float x = randomRadius * Mathf.Cos(randomAngle);
             float z = randomRadius * Mathf.Sin(randomAngle);
             float y = Mathf.Tan(Mathf.PI / 3f) * randomRadius;
