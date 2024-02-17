@@ -8777,6 +8777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b817cf2af7ced408bc8925460c8018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tasks: {fileID: 1113836272}
 --- !u!4 &1808786131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3333295352660894475, guid: d7f94c8b1038406479ebaa67e4616205,

@@ -44,8 +44,12 @@ public class ItemManager : MonoBehaviour
         return item.item_name;
     }
 
+    public Sprite GetIcon()
+    {
+        return item.item_image;
+    }
 
-     public ItemScriptableObject GetItem()
+    public ItemScriptableObject GetItem()
      {
         return item;
      }

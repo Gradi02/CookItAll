@@ -367,8 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DishName: {fileID: 7584987341812135717}
-  DishIcon: {fileID: 897819924682673720}
-  TimeSlider: {fileID: 173630606727780115}
+  DishIcon: {fileID: 2009009748496003077}
+  TimeSlider: {fileID: 3814482159661926225}
+  recipe: {fileID: 0}
 --- !u!1 &4982013485193167239
 GameObject:
   m_ObjectHideFlags: 0
