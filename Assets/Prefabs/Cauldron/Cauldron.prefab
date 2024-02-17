@@ -4853,7 +4853,7 @@ Transform:
   m_GameObject: {fileID: 8420396352926038427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.344, y: -0.333, z: 0}
+  m_LocalPosition: {x: 0.344, y: -0.76, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4869,9 +4869,10 @@ GameObject:
   m_Component:
   - component: {fileID: 550270377069850983}
   - component: {fileID: 2413067103183118940}
+  - component: {fileID: 7427726053845424367}
   m_Layer: 0
   m_Name: Cauldron
-  m_TagString: Untagged
+  m_TagString: cauldron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4907,7 +4908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpawnCooldown: 5
-  middleSpawnCooldown: 5
+  middleSpawnCooldown: 0.5
   minEnemies: 3
   freezeTime: 20
   shootsToFreeze: 3
@@ -4916,6 +4917,27 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 2305776168965118563, guid: 5c8fd9967eaa84141b15847baae57bfc,
     type: 3}
   spawningPos: {fileID: 6321863407156686463}
+--- !u!65 &7427726053845424367
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9108971793297386976}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0.3, y: -1.25, z: 0}
 --- !u!1001 &64756646132679733
 PrefabInstance:
   m_ObjectHideFlags: 0

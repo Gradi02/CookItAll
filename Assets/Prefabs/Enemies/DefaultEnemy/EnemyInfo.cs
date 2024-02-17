@@ -14,7 +14,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     [Header("References")]
     private Transform ItemsHolder;
     private culdronManager culdronManager;
-
+    [SerializeField] private Rigidbody rb;
 
 
 
@@ -26,7 +26,6 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     {
         ItemsHolder = GameObject.FindGameObjectWithTag("ItemsHolder").transform;
     }
-
 
 
     ///////////////////////////////////////////////////////////////////////

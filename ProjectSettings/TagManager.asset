@@ -9,6 +9,7 @@ TagManager:
   - item
   - inv
   - manager
+  - cauldron
   layers:
   - Default
   - TransparentFX

@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16754d7cb8c28484ca872b1b792555d7, type: 3}
-  m_Name: t
+  m_Name: rice salad
   m_EditorClassIdentifier: 
-  product: {fileID: 5063315010575719115, guid: b28d45d4c62c9c8499230b5755969b76, type: 3}
+  product: {fileID: 9102723637284875120, guid: 7fe7c0b2fd3ab4843a54fc3681fee866, type: 3}
   ingredients:
-  - {fileID: 11400000, guid: cd7d9f1ec258d6647b921c11ff99e424, type: 2}
-  - {fileID: 11400000, guid: cd7d9f1ec258d6647b921c11ff99e424, type: 2}
+  - {fileID: 11400000, guid: 724c8da7fde30094b9bb50f62f98a9ee, type: 2}
+  - {fileID: 11400000, guid: 16972d15d69ea38438dd1c92a8f5ad5b, type: 2}
+  - {fileID: 11400000, guid: 5c043eb73ca660b4084dcd10b722e82f, type: 2}
   - {fileID: 11400000, guid: d4221488f8319224abd04985c3d8a833, type: 2}

@@ -7,6 +7,12 @@ public class enemyMovement : MonoBehaviour
 {
     private Transform target;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator anim;
+
+    private void Start()
+    {
+        agent.updateRotation = true;
+    }
 
     void FixedUpdate()
     {
@@ -21,5 +27,30 @@ public class enemyMovement : MonoBehaviour
                 target = GameObject.FindGameObjectWithTag("Player").transform;
             }
         }
+    }
+
+    private void Update()
+    {
+/*        if (!agent.isStopped)
+        {
+            if (agent.desiredVelocity.magnitude > agent.stoppingDistance)
+            {
+                anim.SetBool("walk", true);
+
+                // Oblicz kierunek do celu
+                Vector3 targetDirection = (agent.steeringTarget - transform.position).normalized;
+
+                // Obróæ w kierunku celu
+                if (targetDirection != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
+                }
+            }
+            else
+            {
+                anim.SetBool("walk", false);
+            }
+        }*/
     }
 }
