@@ -45,10 +45,6 @@ public class Tasks : MonoBehaviour
 		int RandomRecipe = Random.Range(0, LevelRecipes.Count);
 		Recipes recipe = LevelRecipes[RandomRecipe];
 		//-----------------
-		string RecipeName = recipe.product.name;
-		Sprite RecipeIcon = null;
-		int TimeToCook = 25;
-		//-----------------
 
 
 
@@ -57,56 +53,21 @@ public class Tasks : MonoBehaviour
 		Task.transform.localScale = Vector3.zero;
 		TaskInfo T = Task.GetComponent<TaskInfo>();
 
-		if (RecipeName != null)
+		if (recipe != null)
 		{
-			T.DishName.text = RecipeName;
 			T.recipe = recipe;
-		}
-
-		if (RecipeIcon != null) 
-		{ 
-			T.DishIcon.GetComponent<Image>().sprite = RecipeIcon; 
-		}
-
-		if (TimeToCook > 0)
-		{
-			T.TimeSlider.GetComponent<Slider>().maxValue = TimeToCook;
-			T.TimeSlider.GetComponent<Slider>().value = TimeToCook;
 		}
 
 		TaskList.Add(T);
 		Debug.Log(TaskList.Count);
 
-		StartCoroutine(TimeToDestroy(TimeToCook, T));
+		//StartCoroutine(TimeToDestroy(TimeToCook, T));
 	}
 
-	private IEnumerator TimeToDestroy(int Timer, TaskInfo t)
-	{
-		float remainingTime = Timer;
-
-		LeanTween.scale(t.gameObject, new Vector3(1, 1, 1), 1f);
-		LeanTween.rotate(t.gameObject, new Vector3(180,180,180), 1f);
-
-		yield return new WaitForSeconds(1f);
-
-		while (remainingTime > 0)
-		{
-			if (t != null)
-			{
-				t.TimeSlider.GetComponent<Slider>().value = remainingTime;
-				yield return new WaitForSeconds(0.05f);
-				remainingTime -= 0.05f;
-			}
-		}
-		TaskList.Remove(t);
-
-		Destroy(t.gameObject);
-
-	}
 
 	public void DestroyTask(TaskInfo TI)
 	{
-		StopCoroutine(TimeToDestroy(0, null));
+		//StopCoroutine(TimeToDestroy(0, null));
 		TaskList.Remove(TI);
 		Destroy(TI.gameObject);
 	}
