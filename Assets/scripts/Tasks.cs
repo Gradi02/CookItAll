@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,23 +11,65 @@ public class Tasks : MonoBehaviour
 	public GameObject TaskListCanva;
 
 	public List<TaskInfo> TaskList = new();
+
+
+	public List<Recipes> LevelRecipes = new();
 	private void Start()
 	{
+		StartCoroutine(TaskLoop());
+	}
+	private IEnumerator TaskLoop()
+	{
+		//first task - game start
+		yield return new WaitForSeconds(1f);
 		GiveTask();
+
+
+		//loop
+		while (true)
+		{
+			yield return new WaitForSeconds(1f);
+			if (TaskList.Count < 5)
+			{
+				int cooldown = Random.Range(15, 40);
+				yield return new WaitForSeconds(cooldown);
+				GiveTask();
+			}
+		}
 	}
 
 	private void GiveTask()
 	{
+		//WYLOSUJ RECEPTURE
+		Recipes recipe = LevelRecipes[0];
+		//-----------------
+		string RecipeName = recipe.product.name;
+		Sprite RecipeIcon = null;
+		int TimeToCook = 25;
+		//-----------------
+
+
+
+		//RECEPTURA NA CANVE
 		GameObject Task = Instantiate(TaskObj, TaskListCanva.transform.position, Quaternion.identity, TaskListCanva.transform);
 		Task.transform.localScale = Vector3.zero;
 		TaskInfo T = Task.GetComponent<TaskInfo>();
 
-		T.DishName.text= "MURZYNEK";											//TUTAJ USTAW NAZWE DANIA!
-		T.DishIcon.GetComponent<Image>().sprite = null;							//TUTAJ USTAW IKONKE Z DANIA!
+		if (RecipeName != null)
+		{
+			T.DishName.text = RecipeName;
+		}
 
-		int TimeToCook = 25;                                                    //TUTAJ USTAW CZAS TRWANIA TASKA!
-		T.TimeSlider.GetComponent<Slider>().maxValue = TimeToCook;
-		T.TimeSlider.GetComponent<Slider>().value = TimeToCook;
+		if (RecipeIcon != null) 
+		{ 
+			T.DishIcon.GetComponent<Image>().sprite = RecipeIcon; 
+		}
+
+		if (TimeToCook > 0)
+		{
+			T.TimeSlider.GetComponent<Slider>().maxValue = TimeToCook;
+			T.TimeSlider.GetComponent<Slider>().value = TimeToCook;
+		}
 
 		TaskList.Add(T);
 		Debug.Log(TaskList.Count);
