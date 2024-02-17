@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -41,7 +42,8 @@ public class Tasks : MonoBehaviour
 	private void GiveTask()
 	{
 		//WYLOSUJ RECEPTURE
-		Recipes recipe = LevelRecipes[0];
+		int RandomRecipe = Random.Range(0, LevelRecipes.Count);
+		Recipes recipe = LevelRecipes[RandomRecipe];
 		//-----------------
 		string RecipeName = recipe.product.name;
 		Sprite RecipeIcon = null;
@@ -58,6 +60,7 @@ public class Tasks : MonoBehaviour
 		if (RecipeName != null)
 		{
 			T.DishName.text = RecipeName;
+			T.recipe = recipe;
 		}
 
 		if (RecipeIcon != null) 
@@ -88,14 +91,23 @@ public class Tasks : MonoBehaviour
 
 		while (remainingTime > 0)
 		{
-			t.TimeSlider.GetComponent<Slider>().value = remainingTime;
-			yield return new WaitForSeconds(0.05f);
-			remainingTime -= 0.05f;
+			if (t != null)
+			{
+				t.TimeSlider.GetComponent<Slider>().value = remainingTime;
+				yield return new WaitForSeconds(0.05f);
+				remainingTime -= 0.05f;
+			}
 		}
 		TaskList.Remove(t);
-		Debug.Log(TaskList.Count);
 
 		Destroy(t.gameObject);
 
+	}
+
+	public void DestroyTask(TaskInfo TI)
+	{
+		StopCoroutine(TimeToDestroy(0, null));
+		TaskList.Remove(TI);
+		Destroy(TI.gameObject);
 	}
 }
