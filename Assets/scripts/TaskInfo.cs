@@ -9,4 +9,5 @@ public class TaskInfo : MonoBehaviour
     public TextMeshProUGUI DishName;
     public GameObject DishIcon;
     public GameObject TimeSlider;
+    public Recipes recipe;
 }
