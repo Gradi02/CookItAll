@@ -21,7 +21,7 @@ public class spawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other != null && enemyToSpawn != null && !sp)
+        if(other != null && enemyToSpawn != null && !sp && !other.CompareTag("cauldron"))
         {
             sp = true;
             GameObject e = Instantiate(enemyToSpawn, transform.position + new Vector3(0, 1, 0), Quaternion.identity);

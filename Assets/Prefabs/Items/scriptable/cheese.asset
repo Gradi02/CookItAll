@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a64cb76621b1ba4e9e3061c5c856b98, type: 3}
+  m_Name: cheese
+  m_EditorClassIdentifier: 
+  item_name: cheese
+  item_image: {fileID: 21300000, guid: 418afe41884d3ce4a8292a9d1f46a6ff, type: 3}
+  item_model: {fileID: 4300397582918625818, guid: 25a9bfed0d6c62542893f980e12b2863,
+    type: 3}

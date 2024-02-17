@@ -2023,7 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -2038,7 +2038,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.11666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 71e4f47234fdd8d4c987735f49ac1277, type: 2}
   m_BuildHeightMesh: 0
@@ -6922,7 +6922,7 @@ PrefabInstance:
     - target: {fileID: 5467521345521625397, guid: bc9f7ecc9ff036944b883e9a409316e6,
         type: 3}
       propertyPath: recipes.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5467521345521625397, guid: bc9f7ecc9ff036944b883e9a409316e6,
         type: 3}
@@ -6934,7 +6934,7 @@ PrefabInstance:
         type: 3}
       propertyPath: recipes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: a30c041f2db30aa40bd3a96e4c7658c3,
+      objectReference: {fileID: 11400000, guid: cf7080a69c4cbe043b613ece0ebe959a,
         type: 2}
     - target: {fileID: 5467521345521625397, guid: bc9f7ecc9ff036944b883e9a409316e6,
         type: 3}
@@ -11411,6 +11411,47 @@ PrefabInstance:
       propertyPath: middleSpawnCooldown
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: enemiesPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1759529371189840667, guid: d436d3b7b5a54834482e7a51b464ae08,
+        type: 3}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.344
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321863407156686463, guid: bd2e77150afaf064e8fc5d6fa05dd286,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9108971793297386976, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}
       propertyPath: m_Name
@@ -11448,6 +11489,7 @@ SceneRoots:
   - {fileID: 177038887}
   - {fileID: 1096719412}
   - {fileID: 5011318548777334298}
+  - {fileID: 1417278940}
   - {fileID: 100668223}
   - {fileID: 993290026}
   - {fileID: 623903989}
@@ -11461,7 +11503,6 @@ SceneRoots:
   - {fileID: 151075864582997109}
   - {fileID: 82414928601970622}
   - {fileID: 3475859518338170544}
-  - {fileID: 1417278940}
   - {fileID: 1319786722}
   - {fileID: 1781571107}
   - {fileID: 1896443847}
