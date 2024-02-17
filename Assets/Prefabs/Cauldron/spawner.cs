@@ -26,7 +26,7 @@ public class spawner : MonoBehaviour
             sp = true;
             GameObject e = Instantiate(enemyToSpawn, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             culdronManager.AddEnemyToList(e);
-            e.GetComponent<EnemyInfo>().SetManager(culdronManager);
+            e.GetComponentInChildren<EnemyInfo>().SetManager(culdronManager);
             Destroy(gameObject);
         }
     }

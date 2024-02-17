@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     private Transform target;
     [SerializeField] private NavMeshAgent agent;
@@ -31,9 +31,16 @@ public class enemyMovement : MonoBehaviour
 
     private void Update()
     {
-/*        if (!agent.isStopped)
+        //  if (!agent.isStopped)
+        //  {
+        //      if (agent.desiredVelocity.magnitude > agent.stoppingDistance)
+        //      {
+
+        if (target != null)
         {
-            if (agent.desiredVelocity.magnitude > agent.stoppingDistance)
+            float distance = Vector3.Distance(this.gameObject.transform.position, target.position);
+
+            if (distance > 1)
             {
                 anim.SetBool("walk", true);
 
@@ -43,7 +50,7 @@ public class enemyMovement : MonoBehaviour
                 // Obróæ w kierunku celu
                 if (targetDirection != Vector3.zero)
                 {
-                    Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
                 }
             }
@@ -51,6 +58,8 @@ public class enemyMovement : MonoBehaviour
             {
                 anim.SetBool("walk", false);
             }
-        }*/
+        }
     }
 }
+
+//}
