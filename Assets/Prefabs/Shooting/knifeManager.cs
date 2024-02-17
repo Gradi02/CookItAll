@@ -40,25 +40,4 @@ public class knifeManager : MonoBehaviour
 			}
 		}
     }
-
-	private void Freeze(Collider other, Vector3 pos)
-	{
-		IknifeInteraction interaction = other.GetComponent<IknifeInteraction>();
-
-		if (interaction != null)
-		{
-			interaction.knifeInteract();
-			Destroy(gameObject);
-		}
-		else
-		{
-			gameObject.GetComponent<BoxCollider>().enabled = false;
-			gameObject.GetComponent<Rigidbody>().useGravity = false;
-			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-			gameObject.GetComponent<Rigidbody>().freezeRotation = true;
-			gameObject.transform.position = pos + transform.forward * 0.2f;
-			Destroy(gameObject, 10f);
-		}
-	}
-
 }
