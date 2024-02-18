@@ -86,6 +86,12 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) < attackRange)
         {
             Debug.Log("Zadano dmg");
+            GiveDamage();
         }
     }
+
+    public void GiveDamage()
+    {
+        target.GetComponent<Hp>().health_val -= 1;
+	}
 }
