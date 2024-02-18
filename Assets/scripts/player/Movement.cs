@@ -6,9 +6,10 @@ public class Movement : MonoBehaviour
 {
 
 	private float moveSpeed = 5f;		 //PREDKOSC
-	private float maxSpeed = 5.5f;		 //MAKS bo przez Force predkosc sie zwieksza
+	//private float maxSpeed = 7.5f;		 //MAKS bo przez Force predkosc sie zwieksza
 	private float drag = 5f;			 //ograniczenie slizgania sie przez force
-	private float jumpforce = 1f;		 //moc skoku
+	private float jumpforce = 5f;		 //moc skoku
+	private bool jumped = false;		
 	public Transform orientation;
 	Vector3 moveDIrection;
 
@@ -25,9 +26,21 @@ public class Movement : MonoBehaviour
     {
 		KeyInput();
 
-		if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKey(KeyCode.Space) && jumped == false)
 		{
-			Jump();
+			jumped = true;
+			StartCoroutine(Jump());
+
+		}
+
+		if (jumped)
+		{
+			Debug.Log("SKOK");
+			moveSpeed = 3;
+		}
+		else
+		{
+			moveSpeed = 5;
 		}
 	}
 	
@@ -49,12 +62,9 @@ public class Movement : MonoBehaviour
 	{
 		//ruszamy sie, nadajemy moc!
 		moveDIrection = orientation.forward * VerticalInput + orientation.right * HorizontalInput;
-		if (moveSpeed < maxSpeed)
-		{
-			rb.AddForce(moveDIrection.normalized * moveSpeed * 10f, ForceMode.Force);
-		}
+		rb.AddForce(moveDIrection.normalized * moveSpeed * 10f, ForceMode.Force);
 	}
-
+	/*
 	private void Jump()
 	{
 		// SprawdŸ, czy postaæ znajduje siê na ziemi, aby unikn¹æ podwójnego skoku
@@ -63,11 +73,26 @@ public class Movement : MonoBehaviour
 			rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 		}
 	}
+	*/
+
+	private IEnumerator Jump()
+	{
+		jumped = true;
+		rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+		yield return new WaitForSeconds(0.3f);
+		rb.AddForce(-Vector3.up * jumpforce/7, ForceMode.Impulse);
+		yield return new WaitForSeconds(0.05f);
+		rb.AddForce(-Vector3.up * jumpforce/5, ForceMode.Impulse);
+		yield return new WaitForSeconds(0.05f);
+		rb.AddForce(-Vector3.up * jumpforce / 3, ForceMode.Impulse);
+		yield return new WaitForSeconds(0.2f);
+		jumped = false;
+	}
 
 	private bool IsGrounded()
 	{
 		// SprawdŸ, czy postaæ jest na ziemi (na podstawie niewielkiego przesuniêcia od dolnej krawêdzi collidera)
 		float distanceToGround = GetComponent<Collider>().bounds.extents.y;
-		return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.05f);
+		return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
 	}
 }

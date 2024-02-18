@@ -100,7 +100,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
 
             //stosuje
             Rigidbody rb = glut.GetComponent<Rigidbody>();
-            rb.AddForce(direction, ForceMode.Impulse);
+			rb.AddForce(direction , ForceMode.Impulse);
 
             //nadaje mu przeciwnika
             GameObject enemyToSpawn = enemiesPrefabs[Random.Range(0, enemiesPrefabs.Length)];
