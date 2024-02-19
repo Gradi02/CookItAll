@@ -93,19 +93,6 @@ public class Shooting : MonoBehaviour
 					knife.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
 					currentWeapon = null;
 					knife = null;
-
-					/*GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], knifeSpawnPos.position, Quaternion.identity);
-					Rigidbody krb = Knife.GetComponent<Rigidbody>();
-
-					// ¯EBY DOBRZE LECIA£O
-					Vector3 direction = playerCamera.transform.forward;
-					Quaternion targetRotation = Quaternion.LookRotation(direction);
-					Knife.transform.rotation = targetRotation;
-					Knife.transform.Rotate(Vector3.up, 180f);
-
-					// NAPIERDAAALAAAAAJ!!!!!!
-					krb.AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
-					krb.drag = drag;*/
 				}
 			}
 
