@@ -49,7 +49,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     //wywo³ana przez interfejs gdy trafi ten obiekt no¿em
     public void knifeInteract()
     {
-        DamageEnemy(6);
+        DamageEnemy(20);
     }
 
     public void SetManager(culdronManager m)

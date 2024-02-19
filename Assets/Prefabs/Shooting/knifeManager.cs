@@ -8,22 +8,33 @@ public class knifeManager : MonoBehaviour
 	private bool hitted = false;
 	public void Update()
 	{
-		Ray ray = new Ray(gameObject.transform.position, -gameObject.transform.forward);
-		RaycastHit hit;
-
-		if (Physics.Raycast(ray, out hit, maxDistance))
+		if (!hitted)
 		{
-			IknifeInteraction interaction = hit.collider.GetComponent<IknifeInteraction>();
-			if (interaction == null && !hitted && !hit.transform.CompareTag("item"))
+			//Debug.Log(transform.name + " col: " + GetComponent<BoxCollider>().enabled + " vel: " + GetComponent<Rigidbody>().velocity);
+			Ray ray = new Ray(gameObject.transform.position, -gameObject.transform.forward);
+			RaycastHit hit;
+
+			if (Physics.Raycast(ray, out hit, maxDistance))
 			{
-				hitted = true;
-				gameObject.GetComponent<BoxCollider>().enabled = false;
-				gameObject.GetComponent<Rigidbody>().useGravity = false;
-				gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-				gameObject.GetComponent<Rigidbody>().freezeRotation = true;
-				gameObject.transform.position = hit.point + transform.forward * 0.2f;
-				Destroy(gameObject, 10f);
+				IknifeInteraction interaction = hit.collider.GetComponent<IknifeInteraction>();
+				if (interaction == null && !hitted && !hit.transform.CompareTag("item") && !hit.transform.CompareTag("Player") && !hit.transform.CompareTag("knife"))
+				{
+					hitted = true;
+					Debug.Log(hit.point + " co: " + hit.transform.gameObject);
+					GetComponent<BoxCollider>().enabled = false;
+					GetComponent<Rigidbody>().useGravity = false;
+					GetComponent<Rigidbody>().velocity = Vector3.zero;
+					GetComponent<Rigidbody>().freezeRotation = true;
+					transform.position = hit.point + transform.forward * 0.2f;
+					Destroy(gameObject, 10f);
+				}
 			}
+		}
+		else
+        {
+			GetComponent<BoxCollider>().enabled = false;
+			GetComponent<Rigidbody>().useGravity = false;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 

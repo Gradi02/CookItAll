@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5109616461215981314}
   - component: {fileID: 8186970529967283800}
   - component: {fileID: 2244398596131017736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4837,7 +4837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6321863407156686463}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4870,7 +4870,7 @@ GameObject:
   - component: {fileID: 550270377069850983}
   - component: {fileID: 2413067103183118940}
   - component: {fileID: 7427726053845424367}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cauldron
   m_TagString: cauldron
   m_Icon: {fileID: 0}
@@ -4912,6 +4912,8 @@ MonoBehaviour:
   minEnemies: 3
   freezeTime: 20
   shootsToFreeze: 3
+  MinEnemiesToSpawn: 2
+  MaxEnemiesToSpawn: 3
   enemiesPrefabs:
   - {fileID: 2922407725004040456, guid: 07049ff483b83ee43a8c173cbdb28194, type: 3}
   spawnerPrefab: {fileID: 2305776168965118563, guid: 5c8fd9967eaa84141b15847baae57bfc,
@@ -4946,6 +4948,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 550270377069850983}
     m_Modifications:
+    - target: {fileID: -9102117403313577056, guid: cec819a9eb1af754094933f8d44c818f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8812528941401185217, guid: cec819a9eb1af754094933f8d44c818f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cec819a9eb1af754094933f8d44c818f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4996,10 +5008,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8553417584757162366, guid: cec819a9eb1af754094933f8d44c818f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cec819a9eb1af754094933f8d44c818f,
         type: 3}
       propertyPath: m_Name
       value: cauldron
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cec819a9eb1af754094933f8d44c818f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
