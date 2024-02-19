@@ -5,11 +5,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-	private float moveSpeed = 5f;		 //PREDKOSC
-	//private float maxSpeed = 7.5f;		 //MAKS bo przez Force predkosc sie zwieksza
-	private float drag = 5f;			 //ograniczenie slizgania sie przez force
-	private float jumpforce = 5f;		 //moc skoku
-	private bool jumped = false;		
+	private float moveSpeed = 5f;		
+	//private float maxSpeed = 7.5f;	
+	private float drag = 5f;			 
+	private float jumpforce = 0.5f;		 	
 	public Transform orientation;
 	Vector3 moveDIrection;
 
@@ -19,24 +18,22 @@ public class Movement : MonoBehaviour
 
 	private void Start()
 	{
-		rb =GetComponent<Rigidbody>();
-		rb.freezeRotation= true;
+		rb = GetComponent<Rigidbody>();
+		rb.freezeRotation = true;
 	}
 	private void Update()
     {
 		KeyInput();
 
-		if (Input.GetKey(KeyCode.Space) && jumped == false)
+		if (Input.GetKey(KeyCode.Space) && IsGrounded())
 		{
-			jumped = true;
-			StartCoroutine(Jump());
-
+			Jump();
 		}
 
-		if (jumped)
+		if (!IsGrounded())
 		{
-			Debug.Log("SKOK");
 			moveSpeed = 3;
+			rb.AddForce(Vector3.down * -9.81f * Time.deltaTime);
 		}
 		else
 		{
@@ -60,35 +57,16 @@ public class Movement : MonoBehaviour
 
 	private void MovePlayer()
 	{
-		//ruszamy sie, nadajemy moc!
 		moveDIrection = orientation.forward * VerticalInput + orientation.right * HorizontalInput;
 		rb.AddForce(moveDIrection.normalized * moveSpeed * 10f, ForceMode.Force);
 	}
-	/*
 	private void Jump()
 	{
-		// SprawdŸ, czy postaæ znajduje siê na ziemi, aby unikn¹æ podwójnego skoku
 		if (IsGrounded())
 		{
 			rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 		}
 	}
-	*/
-
-	private IEnumerator Jump()
-	{
-		jumped = true;
-		rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-		yield return new WaitForSeconds(0.3f);
-		rb.AddForce(-Vector3.up * jumpforce/7, ForceMode.Impulse);
-		yield return new WaitForSeconds(0.05f);
-		rb.AddForce(-Vector3.up * jumpforce/5, ForceMode.Impulse);
-		yield return new WaitForSeconds(0.05f);
-		rb.AddForce(-Vector3.up * jumpforce / 3, ForceMode.Impulse);
-		yield return new WaitForSeconds(0.2f);
-		jumped = false;
-	}
-
 	private bool IsGrounded()
 	{
 		// SprawdŸ, czy postaæ jest na ziemi (na podstawie niewielkiego przesuniêcia od dolnej krawêdzi collidera)
