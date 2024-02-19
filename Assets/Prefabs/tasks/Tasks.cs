@@ -32,7 +32,7 @@ public class Tasks : MonoBehaviour
 			yield return new WaitForSeconds(1f);
 			if (TaskList.Count < 5)
 			{
-				int cooldown = Random.Range(15, 40);
+				int cooldown = Random.Range(2, 8);
 				yield return new WaitForSeconds(cooldown);
 				GiveTask();
 			}
@@ -50,7 +50,6 @@ public class Tasks : MonoBehaviour
 
 		//RECEPTURA NA CANVE
 		GameObject Task = Instantiate(TaskObj, TaskListCanva.transform.position, Quaternion.identity, TaskListCanva.transform);
-		Task.transform.localScale = Vector3.zero;
 		TaskInfo T = Task.GetComponent<TaskInfo>();
 
 		if (recipe != null)
@@ -69,6 +68,7 @@ public class Tasks : MonoBehaviour
 	{
 		//StopCoroutine(TimeToDestroy(0, null));
 		TaskList.Remove(TI);
-		Destroy(TI.gameObject);
+		LeanTween.moveY(TI.gameObject, (TI.gameObject.transform.position.y + 250), 0.5f).setEase(LeanTweenType.easeInExpo);
+		Destroy(TI.gameObject, 0.6f);
 	}
 }

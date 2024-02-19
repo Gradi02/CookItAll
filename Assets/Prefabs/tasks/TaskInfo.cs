@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TaskInfo : MonoBehaviour
 {
     public TextMeshProUGUI DishName;
-    public Image DishIcon;
-    public Slider TimeSlider;
-    public Recipes recipe;
+    public UnityEngine.UI.Image DishIcon;
+    public UnityEngine.UI.Slider TimeSlider;
+	public UnityEngine.UI.Image fill;
+	public Recipes recipe;
+	private bool end = false;
 
 
     private void Start()
@@ -18,25 +21,52 @@ public class TaskInfo : MonoBehaviour
 		DishName.text = recipe.product.GetComponent<ItemManager>().GetItemName();
 		StartCoroutine(TimeToDestroy(recipe.timeToCook));
     }
-
-    private IEnumerator TimeToDestroy(float Timer)
+	private IEnumerator TimeToDestroy(float Timer)
 	{
 		float remainingTime = Timer;
 		TimeSlider.maxValue = remainingTime;
-
-		LeanTween.scale(this.gameObject, new Vector3(1, 1, 1), 1f);
-		LeanTween.rotate(this.gameObject, new Vector3(180, 180, 180), 1f);
-
-		yield return new WaitForSeconds(1f);
-
+		StartCoroutine(MoveStart());
 		while (remainingTime > 0)
 		{
 			TimeSlider.value = remainingTime;
 			yield return new WaitForSeconds(0.05f);
 			remainingTime -= 0.05f;
-		}
-		GameObject.FindGameObjectWithTag("manager").GetComponent<Tasks>().TaskList.Remove(this);
 
-		Destroy(gameObject);
+			if (remainingTime < 5f && end == false)
+			{
+				Debug.Log("KONIEC TASKA NEDLUGO");
+				end = true;
+				StartCoroutine(EndingTask());
+			}
+		}
+
+		GameObject.FindGameObjectWithTag("manager").GetComponent<Tasks>().TaskList.Remove(this);
+		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y+250), 0.5f).setEase(LeanTweenType.easeInExpo);
+		Destroy(gameObject, 0.6f);
+	}
+
+	private IEnumerator MoveStart()
+	{
+		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y + 60), 0.1f).setEase(LeanTweenType.easeOutBack);
+		yield return new WaitForSeconds(0.1f);
+		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y - 80), 0.3f).setEase(LeanTweenType.easeOutBack);
+		yield return new WaitForSeconds(0.3f);
+		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y + 20), 0.3f).setEase(LeanTweenType.easeOutBack);
+	}
+
+	private IEnumerator EndingTask()
+	{
+		while (true && this.gameObject != null)
+		{
+			float tick = 0.05f;
+			LeanTween.rotateZ(this.gameObject, 2f, tick);
+			yield return new WaitForSeconds(tick);
+			LeanTween.rotateZ(this.gameObject, 0f, tick);
+			yield return new WaitForSeconds(tick);
+			LeanTween.rotateZ(this.gameObject, -2f, tick);
+			yield return new WaitForSeconds(tick);
+			LeanTween.rotateZ(this.gameObject, 0, tick);
+			yield return new WaitForSeconds(tick);
+		}
 	}
 }
