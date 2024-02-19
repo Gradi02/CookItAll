@@ -12,9 +12,14 @@ public class Shooting : MonoBehaviour
 	//STRZELANIE
 	private Camera playerCamera;
 	private float shootSpeed =60f;
-	private float drag = 1;
-	public Transform knifeSpawnPos;
 	public GameObject[] weaponsBasicSet;
+	//===================================
+	private GameObject currentWeapon = null;
+	public Transform knifeSpawnPos;
+	public Transform handTransform;
+	private GameObject knife = null;
+	private float nextShoot = 0;
+	private float shotCol = 1.5f;
 
 
 	//REKA
@@ -29,7 +34,6 @@ public class Shooting : MonoBehaviour
 	public TextMeshProUGUI ammoWarning;
 	public Slider ammoSlider;
 	private bool IsReloading = false;
-	private bool ShootCooldown = false;
 
 	private void Start()
 	{
@@ -40,17 +44,15 @@ public class Shooting : MonoBehaviour
 
 	void Update()
 	{
+		//Ammo manager
 		ammotxt.text = ammo.ToString() + " / " + Maxammo.ToString();
-
-		if(ammo == 7)
-		{
-			
-		}
 
 		if (IsReloading == true)
 		{
 			ammoWarning.text = "RELOADING";
 			ammoWarning.color = new Color(255, 255, 255, 1);
+			if(knife != null)
+				Destroy(knife);
 		}
 
 		if (ammo != 0)
@@ -60,16 +62,39 @@ public class Shooting : MonoBehaviour
 
 
 
+
+
+		//Shooting manager
+		if(currentWeapon == null)
+        {
+			int rand = Random.Range(0, weaponsBasicSet.Length);
+			currentWeapon = weaponsBasicSet[rand];
+		}
+
+		if(knife != null)
+        {
+			knife.transform.localPosition = Vector3.zero;
+        }
+
+
 		if (playerCamera != null && handSelected)
 		{
-			if (Input.GetKeyDown(KeyCode.Mouse0) && !IsReloading)
+			if (Input.GetKeyDown(KeyCode.Mouse0) && !IsReloading && knife != null && ammo > 0)
 			{
-				if (ammo > 0 && ShootCooldown == false)
+				if (Time.time > nextShoot)
 				{
-					StartCoroutine(Cooldown());
+					nextShoot = Time.time + shotCol;
 					ammo--;
-					//Vector3 pos = playerCamera.transform.position + playerCamera.transform.forward * 2f;
-					GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], knifeSpawnPos.position, Quaternion.identity);
+
+					knife.transform.parent = null;
+					knife.GetComponent<Rigidbody>().useGravity = true;
+					knife.GetComponent<BoxCollider>().enabled = true;
+					knife.GetComponent<knifeManager>().enabled = true;
+					knife.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
+					currentWeapon = null;
+					knife = null;
+
+					/*GameObject Knife = Instantiate(weaponsBasicSet[Random.Range(0,weaponsBasicSet.Length)], knifeSpawnPos.position, Quaternion.identity);
 					Rigidbody krb = Knife.GetComponent<Rigidbody>();
 
 					// ¯EBY DOBRZE LECIA£O
@@ -80,7 +105,7 @@ public class Shooting : MonoBehaviour
 
 					// NAPIERDAAALAAAAAJ!!!!!!
 					krb.AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
-					krb.drag = drag;
+					krb.drag = drag;*/
 				}
 			}
 
@@ -101,12 +126,7 @@ public class Shooting : MonoBehaviour
 			}
 		}
 	}
-	private IEnumerator Cooldown()
-	{
-		ShootCooldown = true;
-		yield return new WaitForSeconds(0.3f);
-		ShootCooldown = false;
-	}
+
 	private IEnumerator Reload()
 	{
 		ammoSlider.gameObject.SetActive(true);
@@ -129,6 +149,42 @@ public class Shooting : MonoBehaviour
     {
 		handSelected = sin;
 		hand.SetActive(sin);
+
+		if(sin)
+        {
+			if (knife == null && !IsReloading)
+			{
+				if (currentWeapon != null)
+				{
+					knife = Instantiate(currentWeapon, knifeSpawnPos.position, Quaternion.identity, handTransform);
+					knife.GetComponent<Rigidbody>().useGravity = false;
+					knife.GetComponent<BoxCollider>().enabled = false;
+
+					Vector3 direction = playerCamera.transform.forward;
+					Quaternion targetRotation = Quaternion.LookRotation(direction);
+					knife.transform.rotation = targetRotation;
+					knife.transform.Rotate(Vector3.up, 180f);
+				}
+				else
+				{
+					int rand = Random.Range(0, weaponsBasicSet.Length);
+					currentWeapon = weaponsBasicSet[rand];
+
+					knife = Instantiate(currentWeapon, knifeSpawnPos.position, Quaternion.identity, handTransform);
+					knife.GetComponent<Rigidbody>().useGravity = false;
+					knife.GetComponent<BoxCollider>().enabled = false;
+
+					Vector3 direction = playerCamera.transform.forward;
+					Quaternion targetRotation = Quaternion.LookRotation(direction);
+					knife.transform.rotation = targetRotation;
+					knife.transform.Rotate(Vector3.up, 180f);
+				}
+			}
+		}
+		else
+        {
+			Destroy(knife);
+        }
     }
 }
 

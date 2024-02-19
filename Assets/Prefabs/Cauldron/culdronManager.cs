@@ -91,7 +91,7 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
 
             //losuje parametry rzucenia
             float randomAngle = Random.Range(0f, Mathf.PI * 2f);
-            float randomRadius = Random.Range(2, 6);
+            float randomRadius = Random.Range(3, 5);
             float x = randomRadius * Mathf.Cos(randomAngle);
             float z = randomRadius * Mathf.Sin(randomAngle);
             float y = Mathf.Tan(Mathf.PI / 3f) * randomRadius;
