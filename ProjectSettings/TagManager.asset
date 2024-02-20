@@ -10,6 +10,7 @@ TagManager:
   - inv
   - manager
   - cauldron
+  - start
   layers:
   - Default
   - TransparentFX
