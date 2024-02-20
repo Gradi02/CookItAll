@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
 	public GameObject[] StartText;
-	private Vector3[] TextPos;
-
+	public GameObject[] Level1Text;
+	private Vector3[] StartTextPos;
+	private Vector3[] Level1TextPos;
 	private void Start()
 	{
-		TextPos = new Vector3[11];
+		StartTextPos = new Vector3[StartText.Length];
+		Level1TextPos = new Vector3[Level1Text.Length];
 	}
 	void Update()
 	{
@@ -25,26 +29,38 @@ public class MenuManager : MonoBehaviour
 				{
 					if (hit.collider.CompareTag("start"))
 					{
-						StartCoroutine(Click(StartText));
-						LeanTween.move(Camera.main.gameObject, new Vector3(25f,Camera.main.gameObject.transform.position.y,2f), 2f).setEase(LeanTweenType.easeInSine);
-						LeanTween.rotateY(Camera.main.gameObject, 90f, 2f).setEase(LeanTweenType.easeInSine);
-					} 
+						StartCoroutine(Click(StartText, StartTextPos));
+						LeanTween.move(Camera.main.gameObject, new Vector3(25f,Camera.main.gameObject.transform.position.y,2f), 2f).setEase(LeanTweenType.easeInOutBack);
+						LeanTween.rotateY(Camera.main.gameObject, 90f, 2f).setEase(LeanTweenType.easeInOutBack);
+					}
+
+					if (hit.collider.CompareTag("level"))
+					{
+						int which_lvl = hit.collider.gameObject.GetComponent<LevelManager>().level;
+						StartCoroutine(Click(Level1Text, Level1TextPos));
+						StartCoroutine(SceneLoading(which_lvl));
+					}
 				}
 			}
 		}
 	}
 
+	private IEnumerator SceneLoading(int lvl)
+	{
+		yield return new WaitForSeconds(1f);
+		SceneManager.LoadScene(lvl, LoadSceneMode.Single);
+	}
 
-	private IEnumerator Click(GameObject[] TextToClick)
+	private IEnumerator Click(GameObject[] TextToClick, Vector3[] Position)
 	{
 		for (int i = 0; i < TextToClick.Length; i++)
 		{
-			TextPos[i] = TextToClick[i].transform.position;
+			Position[i] = TextToClick[i].transform.position;
 		}
 
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
-			int randomPower = Random.Range(5, 7);
+			int randomPower = Random.Range(3, 5);
 			Vector3 randomDirection = Random.insideUnitSphere.normalized;
 			float randomAngle = Random.Range(180f, 360f);
 			randomDirection = Quaternion.AngleAxis(randomAngle, Random.onUnitSphere) * randomDirection;
@@ -55,7 +71,7 @@ public class MenuManager : MonoBehaviour
 		yield return new WaitForSeconds(2.2f);
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
-			TextToClick[i].transform.position = TextPos[i];
+			TextToClick[i].transform.position = Position[i];
 		}
 	}
 }
