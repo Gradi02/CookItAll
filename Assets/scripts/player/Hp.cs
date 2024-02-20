@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Hp : MonoBehaviour
 {
     public float health_val = 10;
-    public UnityEngine.UI.Slider health;
+    public Slider health;
 
     void Start()
     {
+        health.maxValue = health_val;
         health.value = health_val;
         StartCoroutine(Regen());
     }
