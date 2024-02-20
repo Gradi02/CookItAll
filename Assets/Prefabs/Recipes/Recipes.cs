@@ -8,4 +8,5 @@ public class Recipes : ScriptableObject
 	public GameObject product;
 	public List<ItemScriptableObject> ingredients = new();
 	public float timeToCook;
+	public float score;
 }

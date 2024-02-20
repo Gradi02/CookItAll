@@ -12,9 +12,12 @@ public class Tasks : MonoBehaviour
 	public GameObject TaskListCanva;
 
 	public List<TaskInfo> TaskList = new();
-
-
 	public List<Recipes> LevelRecipes = new();
+
+	public bool levelEnd = false;
+	public int MintimeToNextTask = 5;
+	public int MaxtimeToNextTask = 10;
+
 	private void Start()
 	{
 		StartCoroutine(TaskLoop());
@@ -27,14 +30,16 @@ public class Tasks : MonoBehaviour
 
 
 		//loop
-		while (true)
+		while (!levelEnd)
 		{
 			yield return new WaitForSeconds(1f);
-			if (TaskList.Count < 5)
+			if (TaskList.Count < 5 && !levelEnd)
 			{
-				int cooldown = Random.Range(2, 8);
+				int cooldown = Random.Range(MintimeToNextTask, MaxtimeToNextTask);
 				yield return new WaitForSeconds(cooldown);
-				GiveTask();
+
+				if(!levelEnd)
+					GiveTask();
 			}
 		}
 	}
@@ -71,4 +76,12 @@ public class Tasks : MonoBehaviour
 		LeanTween.moveY(TI.gameObject, (TI.gameObject.transform.position.y + 250), 0.5f).setEase(LeanTweenType.easeInExpo);
 		Destroy(TI.gameObject, 0.6f);
 	}
+
+	public void EndLevel()
+    {
+		for(int i=0; i<TaskList.Count; i++)
+		{
+            DestroyTask(TaskList[i]);
+        }
+    }
 }
