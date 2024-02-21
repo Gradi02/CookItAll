@@ -20,7 +20,7 @@ public class knifeManager : MonoBehaviour
 				if (interaction == null && !hitted && !hit.transform.CompareTag("item") && !hit.transform.CompareTag("Player") && !hit.transform.CompareTag("knife"))
 				{
 					hitted = true;
-					Debug.Log(hit.point + " co: " + hit.transform.gameObject);
+					//Debug.Log(hit.point + " co: " + hit.transform.gameObject);
 					GetComponent<BoxCollider>().enabled = false;
 					GetComponent<Rigidbody>().useGravity = false;
 					GetComponent<Rigidbody>().velocity = Vector3.zero;

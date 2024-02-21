@@ -12,6 +12,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float attackRange;
     private float nextAttackAt = 0;
     private bool attacking = false;
+    private bool stun = false;
+    private float stunOutAt = 0;
+    private float stunTime = 1;
+    [SerializeField] private ParticleSystem stunParticle;
 
     private void Start()
     {
@@ -20,21 +24,36 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target != null)
+        if (!stun)
         {
-            agent.SetDestination(target.position);
+            if (target != null)
+            {
+                agent.SetDestination(target.position);
+            }
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("Player") != null)
+                {
+                    target = GameObject.FindGameObjectWithTag("Player").transform;
+                }
+            }
         }
         else
         {
-            if (GameObject.FindGameObjectWithTag("Player") != null)
+            target = null;
+            agent.SetDestination(transform.position);
+
+            if(Time.time > stunOutAt)
             {
-                target = GameObject.FindGameObjectWithTag("Player").transform;
+                stun = false;
+                stunOutAt = 0;
             }
         }
     }
 
     private void Update()
     {
+        Vector3 targetDirection;
         if (target != null)
         {
             float distance = Vector3.Distance(this.gameObject.transform.position, target.position);
@@ -44,26 +63,28 @@ public class EnemyMovement : MonoBehaviour
                 nextAttackAt = 0;
                 attacking = false;
                 anim.SetBool("walk", true);
-
-                Vector3 targetDirection = (agent.steeringTarget - transform.position).normalized;
-
-                if (targetDirection != Vector3.zero)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
-                }
             }
             else
             {
                 anim.SetBool("walk", false);
-                //anim.Play("attack");
 
                 if(Time.time > nextAttackAt && !attacking)
                 {
                     StartCoroutine(MakeAttack());
                 }
             }
+        
+                targetDirection = (agent.steeringTarget - transform.position).normalized;
+
+                if (targetDirection != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
+                }
+            
         }
+
+
     }
 
     private IEnumerator MakeAttack()
@@ -72,26 +93,27 @@ public class EnemyMovement : MonoBehaviour
         anim.Play("attack");
         yield return new WaitForSeconds(1f);
         nextAttackAt = Time.time + attackCooldown;
-        attacking = false;
-        
-        Vector3 targetDirection = (agent.steeringTarget - transform.position).normalized;
-
-        if (targetDirection != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
-        }
 
         //zadaj dmg
-        if (Vector3.Distance(transform.position, target.position) < attackRange)
+        if (!stun)
         {
-            Debug.Log("Zadano dmg");
-            GiveDamage();
+            if (Vector3.Distance(transform.position, target.position) < attackRange)
+            {
+                GiveDamage();
+            }
         }
+        attacking = false;
     }
 
     public void GiveDamage()
     {
-        target.GetComponent<Hp>().health_val -= 1;
+        target.GetComponent<Hp>().DamagePlayer(1);
 	}
+
+    public void StunEnemy()
+    {
+        stun = true;
+        stunParticle.Play();
+        stunOutAt = Time.time + stunTime;
+    }
 }

@@ -42,6 +42,9 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(float scoreIn)
     {
         currentScore += scoreIn;
+
+        if (currentScore < 0) currentScore = 0;
+
         Debug.Log(currentScore);
     }
 

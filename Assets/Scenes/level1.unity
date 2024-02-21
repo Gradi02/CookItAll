@@ -1838,7 +1838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.604, z: -0.03699999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1847,7 +1847,7 @@ Transform:
   - {fileID: 1445852244}
   - {fileID: 1069419363}
   m_Father: {fileID: 902716627}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4600,6 +4600,7 @@ MonoBehaviour:
   - {fileID: 3994250153787668283, guid: 97baf91400fdd2b44a4d71e9bd966c85, type: 3}
   knifeSpawnPos: {fileID: 1445852244}
   handTransform: {fileID: 1069419363}
+  knifeDamage: 6
   hand: {fileID: 428341242}
   ammotxt: {fileID: 868542826}
   ammoWarning: {fileID: 2091670211}
@@ -4647,6 +4648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health_val: 20
   health: {fileID: 1203567507}
+  vol: {fileID: 832575518}
 --- !u!1 &902894552
 GameObject:
   m_ObjectHideFlags: 0
