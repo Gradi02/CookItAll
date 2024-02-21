@@ -12,6 +12,9 @@ TagManager:
   - cauldron
   - start
   - level
+  - options
+  - authors
+  - exit
   layers:
   - Default
   - TransparentFX
@@ -26,7 +29,7 @@ TagManager:
   - micro
   - Ground
   - Culdron
-  - 
+  - menu
   - 
   - 
   - 
