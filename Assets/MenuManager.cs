@@ -3,18 +3,66 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+
+	private float TransSpeed = 1f;
+	private Vignette vn;
+	private DepthOfField df;
+	public Volume vol;
+
 	public GameObject[] StartText;
+	public GameObject[] Options;
+	public GameObject Options_menu;
+	public GameObject[] Authors;
+	public GameObject Authors_menu;
+	public GameObject[] Exit;
+
 	public GameObject[] Level1Text;
+
+
 	private Vector3[] StartTextPos;
+	private Vector3[] OptionsTextPos;
+	private Vector3[] AuthorsTextPos;
+	private Vector3[] ExitTextPos;
+
 	private Vector3[] Level1TextPos;
+
+
+
 	private void Start()
 	{
 		StartTextPos = new Vector3[StartText.Length];
+		OptionsTextPos = new Vector3[Options.Length];
+		AuthorsTextPos = new Vector3[Authors.Length];
+		ExitTextPos = new Vector3[Exit.Length];
+
 		Level1TextPos = new Vector3[Level1Text.Length];
+
+		SavePos(StartText, StartTextPos);
+		SavePos(Options, OptionsTextPos);
+		SavePos(Authors, AuthorsTextPos);
+		SavePos(Exit, ExitTextPos);
+		SavePos(Level1Text, Level1TextPos);
+
+
+		Vignette temp;
+		if (vol.profile.TryGet<Vignette>(out temp))
+		{
+			vn = temp;
+		}
+
+		DepthOfField dof;
+		if (vol.profile.TryGet<DepthOfField>(out dof))
+		{
+			df = dof;
+			
+		}
+
+		
 	}
 	void Update()
 	{
@@ -30,18 +78,62 @@ public class MenuManager : MonoBehaviour
 					if (hit.collider.CompareTag("start"))
 					{
 						StartCoroutine(Click(StartText, StartTextPos));
-						LeanTween.move(Camera.main.gameObject, new Vector3(25f,Camera.main.gameObject.transform.position.y,2f), 2f).setEase(LeanTweenType.easeInOutBack);
-						LeanTween.rotateY(Camera.main.gameObject, 90f, 2f).setEase(LeanTweenType.easeInOutBack);
+						LeanTween.move(Camera.main.gameObject, new Vector3(25f,Camera.main.gameObject.transform.position.y), TransSpeed).setEase(LeanTweenType.easeInOutBack);
+						LeanTween.rotateY(Camera.main.gameObject, 90f, TransSpeed).setEase(LeanTweenType.easeInOutBack);
 					}
 
 					if (hit.collider.CompareTag("level"))
 					{
-						int which_lvl = hit.collider.gameObject.GetComponent<LevelManager>().level;
 						StartCoroutine(Click(Level1Text, Level1TextPos));
+						int which_lvl = hit.collider.gameObject.GetComponent<LevelManager>().level;
 						StartCoroutine(SceneLoading(which_lvl));
+					}
+
+
+					if (hit.collider.CompareTag("options"))
+					{
+						StartCoroutine(Click(Options, OptionsTextPos));
+						LeanTween.move(Options_menu, new Vector3(0, 2, 3), TransSpeed).setEase(LeanTweenType.easeOutBack);
+						LeanTween.rotateY(Options_menu, 340f, TransSpeed).setEase(LeanTweenType.easeOutBack);
+						df.active = true;
+					}
+
+					if (hit.collider.CompareTag("authors"))
+					{
+						StartCoroutine(Click(Authors, AuthorsTextPos));
+						LeanTween.move(Authors_menu, new Vector3(0, 2, 3), TransSpeed).setEase(LeanTweenType.easeOutBack);
+						LeanTween.rotateY(Authors_menu, 340f, TransSpeed).setEase(LeanTweenType.easeOutBack);
+						df.active = true;
+					}
+
+					if (hit.collider.CompareTag("exit"))
+					{
+						Application.Quit();
 					}
 				}
 			}
+		}
+	}
+	public void FOptionsBack()
+	{
+		LeanTween.moveLocal(Options_menu, new Vector3(-8, 2, 1), TransSpeed).setEase(LeanTweenType.easeOutBack);
+		LeanTween.rotateY(Options_menu, 90f, 2f).setEase(LeanTweenType.easeOutBack);
+		df.active = false;
+	}
+
+	public void FAuthorsBack()
+	{
+		LeanTween.moveLocal(Authors_menu, new Vector3(-4, 2, 6), TransSpeed).setEase(LeanTweenType.easeOutBack);
+		LeanTween.rotateY(Authors_menu, 90f, 2f).setEase(LeanTweenType.easeOutBack);
+		df.active = false;
+	}
+
+
+	private void SavePos(GameObject[] TextToClick, Vector3[] Position)
+	{
+		for (int i = 0; i < TextToClick.Length; i++)
+		{
+			Position[i] = TextToClick[i].transform.position;
 		}
 	}
 
@@ -53,11 +145,6 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator Click(GameObject[] TextToClick, Vector3[] Position)
 	{
-		for (int i = 0; i < TextToClick.Length; i++)
-		{
-			Position[i] = TextToClick[i].transform.position;
-		}
-
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
 			int randomPower = Random.Range(3, 5);
@@ -71,7 +158,7 @@ public class MenuManager : MonoBehaviour
 		yield return new WaitForSeconds(2.2f);
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
-			TextToClick[i].transform.position = Position[i];
+			TextToClick[i].transform.SetPositionAndRotation(Position[i], Quaternion.Euler(90, 0, 0));
 		}
 	}
 }
