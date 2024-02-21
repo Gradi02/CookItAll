@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
 	private Vignette vn;
 	private DepthOfField df;
 	public Volume vol;
+	public ParticleSystem MenuParticle;
 
 	public GameObject[] StartText;
 	public GameObject[] Options;
@@ -31,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
 	private Vector3[] Level1TextPos;
 
-
+	private bool clicked = false;
 
 	private void Start()
 	{
@@ -53,16 +54,7 @@ public class MenuManager : MonoBehaviour
 		if (vol.profile.TryGet<Vignette>(out temp))
 		{
 			vn = temp;
-		}
-
-		DepthOfField dof;
-		if (vol.profile.TryGet<DepthOfField>(out dof))
-		{
-			df = dof;
-			
-		}
-
-		
+		}		
 	}
 	void Update()
 	{
@@ -75,14 +67,15 @@ public class MenuManager : MonoBehaviour
 			{
 				if (hit.collider != null)
 				{
-					if (hit.collider.CompareTag("start"))
+					if (hit.collider.CompareTag("start") && clicked == false)
 					{
 						StartCoroutine(Click(StartText, StartTextPos));
 						LeanTween.move(Camera.main.gameObject, new Vector3(25f,Camera.main.gameObject.transform.position.y), TransSpeed).setEase(LeanTweenType.easeInOutBack);
 						LeanTween.rotateY(Camera.main.gameObject, 90f, TransSpeed).setEase(LeanTweenType.easeInOutBack);
+						clicked = false;
 					}
 
-					if (hit.collider.CompareTag("level"))
+					if (hit.collider.CompareTag("level") && clicked == false)
 					{
 						StartCoroutine(Click(Level1Text, Level1TextPos));
 						int which_lvl = hit.collider.gameObject.GetComponent<LevelManager>().level;
@@ -90,23 +83,21 @@ public class MenuManager : MonoBehaviour
 					}
 
 
-					if (hit.collider.CompareTag("options"))
+					if (hit.collider.CompareTag("options") && clicked == false)
 					{
 						StartCoroutine(Click(Options, OptionsTextPos));
 						LeanTween.move(Options_menu, new Vector3(0, 2, 3), TransSpeed).setEase(LeanTweenType.easeOutBack);
 						LeanTween.rotateY(Options_menu, 340f, TransSpeed).setEase(LeanTweenType.easeOutBack);
-						df.active = true;
 					}
 
-					if (hit.collider.CompareTag("authors"))
+					if (hit.collider.CompareTag("authors") && clicked == false)
 					{
 						StartCoroutine(Click(Authors, AuthorsTextPos));
 						LeanTween.move(Authors_menu, new Vector3(0, 2, 3), TransSpeed).setEase(LeanTweenType.easeOutBack);
 						LeanTween.rotateY(Authors_menu, 340f, TransSpeed).setEase(LeanTweenType.easeOutBack);
-						df.active = true;
 					}
 
-					if (hit.collider.CompareTag("exit"))
+					if (hit.collider.CompareTag("exit") && clicked == false)
 					{
 						Application.Quit();
 					}
@@ -118,14 +109,14 @@ public class MenuManager : MonoBehaviour
 	{
 		LeanTween.moveLocal(Options_menu, new Vector3(-8, 2, 1), TransSpeed).setEase(LeanTweenType.easeOutBack);
 		LeanTween.rotateY(Options_menu, 90f, 2f).setEase(LeanTweenType.easeOutBack);
-		df.active = false;
+		clicked = false;
 	}
 
 	public void FAuthorsBack()
 	{
 		LeanTween.moveLocal(Authors_menu, new Vector3(-4, 2, 6), TransSpeed).setEase(LeanTweenType.easeOutBack);
 		LeanTween.rotateY(Authors_menu, 90f, 2f).setEase(LeanTweenType.easeOutBack);
-		df.active = false;
+		clicked = false;
 	}
 
 
@@ -145,6 +136,7 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator Click(GameObject[] TextToClick, Vector3[] Position)
 	{
+		clicked = true;
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
 			int randomPower = Random.Range(3, 5);
@@ -159,6 +151,18 @@ public class MenuManager : MonoBehaviour
 		for (int i = 0; i<TextToClick.Length; i++)
 		{
 			TextToClick[i].transform.SetPositionAndRotation(Position[i], Quaternion.Euler(90, 0, 0));
+			float x1 = TextToClick[i].gameObject.transform.position.x;
+			float y1 = TextToClick[i].gameObject.transform.position.y;
+			float z1 = TextToClick[i].gameObject.transform.position.z;
+			ParticleSystem part1 = Instantiate(MenuParticle, new Vector3(x1,y1,z1), Quaternion.identity, TextToClick[i].gameObject.transform);
+
+			float x2 = Position[i].x;
+			float y2 = Position[i].y;
+			float z2 = Position[i].z;
+			ParticleSystem part2 =  Instantiate(MenuParticle, new Vector3(x2,y2,z2), Quaternion.identity);
+
+			Destroy(part1.gameObject, 3f);
+			Destroy(part2.gameObject, 3f);
 		}
 	}
 }
