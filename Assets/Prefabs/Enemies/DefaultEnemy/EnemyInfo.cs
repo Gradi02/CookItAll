@@ -15,7 +15,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     private Transform ItemsHolder;
     private culdronManager culdronManager;
     [SerializeField] private Rigidbody rb;
-
+    public GameObject blood;
 
 
 
@@ -49,7 +49,9 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     //wywo³ana przez interfejs gdy trafi ten obiekt no¿em
     public void knifeInteract()
     {
-        DamageEnemy(20);
+        DamageEnemy(GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>().knifeDamage);
+
+        GetComponent<EnemyMovement>().StunEnemy();
     }
 
     public void SetManager(culdronManager m)
@@ -75,8 +77,9 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     //Funkcja niszcz¹ca obiekt przeciwnika
     private void DestroyEnemy()
     {
-        //particle i inne
         culdronManager.RemoveEnemyFromList(gameObject);
+        GameObject b = Instantiate(blood, transform.position + transform.forward + new Vector3(0, 1, 0), Quaternion.identity);
+        Destroy(b, 3);
         Destroy(gameObject);
     }
 

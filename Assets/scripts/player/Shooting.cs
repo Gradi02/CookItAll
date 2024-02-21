@@ -19,8 +19,8 @@ public class Shooting : MonoBehaviour
 	public Transform handTransform;
 	private GameObject knife = null;
 	private float nextShoot = 0;
-	private float shotCol = 1.5f;
-
+	private float shotCol = 0.5f;
+	public float knifeDamage = 6;
 
 	//REKA
 	private bool handSelected = true;
@@ -28,8 +28,8 @@ public class Shooting : MonoBehaviour
 
 
 	//AMMO
-	private int ammo = 7;
-	private int Maxammo = 7;
+	private int ammo = 15;
+	private int Maxammo = 15;
 	public TextMeshProUGUI ammotxt;
 	public TextMeshProUGUI ammoWarning;
 	public Slider ammoSlider;
@@ -123,10 +123,10 @@ public class Shooting : MonoBehaviour
 
 		for (int i = 0; i < Maxammo; i++)
 		{
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.3f);
 			ammoSlider.value += 1;
 		}
-		ammo = 7;
+		ammo = Maxammo;
 		ammoSlider.gameObject.SetActive(false);
 		IsReloading = false;
 	}

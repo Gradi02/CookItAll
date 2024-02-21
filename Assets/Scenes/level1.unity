@@ -4647,6 +4647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health_val: 20
   health: {fileID: 1203567507}
+  vol: {fileID: 832575518}
 --- !u!1 &902894552
 GameObject:
   m_ObjectHideFlags: 0
