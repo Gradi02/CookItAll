@@ -9,6 +9,8 @@ public class FinishTask : MonoBehaviour
 	public GameObject pariclePrefab;
 	public GameObject badPariclePrefab;
 
+	public int FinishedTasks = 0;
+	public int BadTasks = 0;
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("item") && tasks.TaskList.Count > 0)
@@ -18,6 +20,7 @@ public class FinishTask : MonoBehaviour
 				if (other.GetComponent<ItemManager>().GetItemName() == tasks.TaskList[i].recipe.product.GetComponent<ItemManager>().GetItemName())
 				{
 					tasks.GetComponent<ScoreManager>().AddScore(tasks.TaskList[i].recipe.score);
+					FinishedTasks++;
 					tasks.DestroyTask(tasks.TaskList[i]);
 					GameObject p = Instantiate(pariclePrefab, transform.position, Quaternion.identity);
 					p.transform.position = other.transform.position;
@@ -30,6 +33,7 @@ public class FinishTask : MonoBehaviour
 
 		//gdy coœ nie tak
 		tasks.GetComponent<ScoreManager>().AddScore(-badScore);
+		BadTasks++;
 		GameObject b = Instantiate(badPariclePrefab, transform.position, Quaternion.identity);
 		b.transform.position = other.transform.position;
 		Destroy(b, 5);
