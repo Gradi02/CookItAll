@@ -25,7 +25,6 @@ public class TaskInfo : MonoBehaviour
 	{
 		float remainingTime = Timer;
 		TimeSlider.maxValue = remainingTime;
-		StartCoroutine(MoveStart());
 		while (remainingTime > 0)
 		{
 			TimeSlider.value = remainingTime;
@@ -45,13 +44,10 @@ public class TaskInfo : MonoBehaviour
 		Destroy(gameObject, 0.6f);
 	}
 
-	private IEnumerator MoveStart()
+	private void Update()
 	{
-		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y + 60), 0.1f).setEase(LeanTweenType.easeOutBack);
-		yield return new WaitForSeconds(0.1f);
-		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y - 80), 0.3f).setEase(LeanTweenType.easeOutBack);
-		yield return new WaitForSeconds(0.3f);
-		LeanTween.moveY(this.gameObject, (this.gameObject.transform.position.y + 20), 0.3f).setEase(LeanTweenType.easeOutBack);
+		GameObject taskListCanva = GameObject.Find("tasks");
+		Debug.Log(taskListCanva.transform.localPosition.y);
 	}
 
 	private IEnumerator EndingTask()
