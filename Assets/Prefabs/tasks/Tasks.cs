@@ -39,12 +39,12 @@ public class Tasks : MonoBehaviour
 				yield return new WaitForSeconds(cooldown);
 
 				if(!levelEnd)
-					GiveTask();
+					StartCoroutine(GiveTask());
 			}
 		}
 	}
 
-	private void GiveTask()
+	private IEnumerator GiveTask()
 	{
 		//WYLOSUJ RECEPTURE
 		int RandomRecipe = Random.Range(0, LevelRecipes.Count);
@@ -54,7 +54,12 @@ public class Tasks : MonoBehaviour
 
 
 		//RECEPTURA NA CANVE
+		float tick = 0.3f;
+		GameObject taskListCanva = GameObject.Find("tasks");
+		LeanTween.moveY(taskListCanva, taskListCanva.transform.position.y + 200f, tick);
+		yield return new WaitForSeconds(tick);
 		GameObject Task = Instantiate(TaskObj, TaskListCanva.transform.position, Quaternion.identity, TaskListCanva.transform);
+		LeanTween.moveY(taskListCanva, taskListCanva.transform.position.y - 200f, tick);
 		TaskInfo T = Task.GetComponent<TaskInfo>();
 
 		if (recipe != null)
