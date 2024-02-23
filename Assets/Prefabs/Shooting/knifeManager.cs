@@ -26,6 +26,7 @@ public class knifeManager : MonoBehaviour
 					GetComponent<Rigidbody>().velocity = Vector3.zero;
 					GetComponent<Rigidbody>().freezeRotation = true;
 					transform.position = hit.point + transform.forward * 0.2f;
+
 					Destroy(gameObject, 10f);
 				}
 			}

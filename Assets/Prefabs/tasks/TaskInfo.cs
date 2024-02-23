@@ -44,11 +44,10 @@ public class TaskInfo : MonoBehaviour
 		Destroy(gameObject, 0.6f);
 	}
 
-	private void Update()
+	/*private void Update()
 	{
 		GameObject taskListCanva = GameObject.Find("tasks");
-		Debug.Log(taskListCanva.transform.localPosition.y);
-	}
+	}*/
 
 	private IEnumerator EndingTask()
 	{
