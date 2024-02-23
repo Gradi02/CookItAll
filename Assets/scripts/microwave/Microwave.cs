@@ -9,13 +9,19 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 {
 	private RecipesManager rpmanager;
 	private List<ItemScriptableObject> ItemsList = new();
+	private List<GameObject> itemsImages = new();
+	public Transform grid;
+	public GameObject imagePref;
 
 	public ParticleSystem PS;
+	public ParticleSystem badPS1;
+	public ParticleSystem badPS2;
 
 	public Transform dish;
 	private GameObject ready;
 	private bool usable = true;
 	private bool cooking = false;
+
 
     private void Start()
     {
@@ -32,9 +38,9 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 			{
 				StartCoroutine(CookingTime(rp.product));
 			}
-			else
+			else if(ItemsList.Count > 0)
 			{
-				Debug.Log("brak przepisu");
+				StartCoroutine(BadRecipe()); 
 			}
 		}
 	}
@@ -44,11 +50,18 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 		// Sprawdzamy, czy obiekt, który wszed³ w obszar wyzwalacza, ma tag "Player".
 		if (item.CompareTag("item") && usable == true)
 		{
-			gameObject.GetComponent<Animator>().Play("microwave_product");
-			ItemsList.Add(item.GetComponent<ItemManager>().GetItem());
-			Destroy(item.gameObject);
+			if (ItemsList.Count < 10)
+			{
+				gameObject.GetComponent<Animator>().Play("microwave_product");
+				ItemScriptableObject itm = item.GetComponent<ItemManager>().GetItem();
+				ItemsList.Add(itm);
 
-			Debug.Log(ItemsList.Count);
+				GameObject i = Instantiate(imagePref, transform.position, Quaternion.identity, grid);
+				itemsImages.Add(i);
+				i.GetComponent<ItemMicro>().SetItem(itm);
+
+				Destroy(item.gameObject);
+			}
 		}
 	}
 	private IEnumerator CookingTime(GameObject product)
@@ -62,10 +75,38 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 		gameObject.GetComponent<Animator>().SetBool("cooking", false);
 		ready = Instantiate(product, dish.position, Quaternion.identity);
 		ItemsList.Clear();
+		DestroyCanvaItems();
+		itemsImages.Clear();
 		gameObject.GetComponent<Animator>().Play("microwave_open");
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		cooking = false;
 	}
+
+	private IEnumerator BadRecipe()
+    {
+		cooking = true;
+		gameObject.GetComponent<Animator>().SetBool("cooking", true);
+		PS.gameObject.SetActive(true);
+		yield return new WaitForSeconds(0.5f);
+		PS.gameObject.SetActive(false);
+		badPS1.Play();
+		badPS2.Play();
+
+		ItemsList.Clear();
+		DestroyCanvaItems();
+		itemsImages.Clear();
+		gameObject.GetComponent<Animator>().SetBool("cooking", false);
+		gameObject.GetComponent<Animator>().Play("microwave_product");
+		cooking = false;
+	}
+
+	void DestroyCanvaItems()
+    {
+		foreach(GameObject t in itemsImages)
+        {
+			Destroy(t);
+        }
+    }
 
 	private void Update()
 	{

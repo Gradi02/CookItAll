@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyInfo : MonoBehaviour, IknifeInteraction
+public class EnemyInfo : MonoBehaviour
 {
     [Header("Basic Info")]
     [SerializeField] private float health = 20;
@@ -15,7 +15,7 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     private Transform ItemsHolder;
     private culdronManager culdronManager;
     [SerializeField] private Rigidbody rb;
-    public GameObject blood;
+    public ParticleSystem blood;
 
 
 
@@ -46,14 +46,6 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
         CheckForDeath();
     }
 
-    //wywo³ana przez interfejs gdy trafi ten obiekt no¿em
-    public void knifeInteract()
-    {
-        DamageEnemy(GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>().knifeDamage);
-
-        GetComponent<EnemyMovement>().StunEnemy();
-    }
-
     public void SetManager(culdronManager m)
     {
         culdronManager = m;
@@ -78,8 +70,14 @@ public class EnemyInfo : MonoBehaviour, IknifeInteraction
     private void DestroyEnemy()
     {
         culdronManager.RemoveEnemyFromList(gameObject);
-        GameObject b = Instantiate(blood, transform.position + transform.forward + new Vector3(0, 1, 0), Quaternion.identity);
-        Destroy(b, 3);
+        //GameObject b = Instantiate(blood, transform.position + transform.forward + new Vector3(0, 2, 0), Quaternion.identity);
+        //Destroy(b, 3);
+        Vector3 offset = blood.transform.localPosition;
+        blood.transform.parent = null;
+        blood.transform.localScale = new Vector3(1, 1, 1);
+        blood.transform.position = transform.position + offset;
+        blood.Play();
+        Destroy(blood.gameObject, 3);
         Destroy(gameObject);
     }
 

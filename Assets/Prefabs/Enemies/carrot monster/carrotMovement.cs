@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour, IknifeInteraction
+public class carrotMovement : MonoBehaviour, IknifeInteraction
 {
     private Transform target;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator anim;
     [SerializeField] private float attackCooldown;
-    [SerializeField] private float attackRange;
+    [SerializeField] private float castRange;
+    [SerializeField] private ParticleSystem stunParticle;
+    [SerializeField] private GameObject bulletPref;
+    public LayerMask mask;
+
+    private bool ableToAtt = false;
     private float nextAttackAt = 0;
     private bool attacking = false;
     private bool stun = false;
     private float stunOutAt = 0;
     private float stunTime = 1;
-    [SerializeField] private ParticleSystem stunParticle;
 
     private void Start()
     {
@@ -43,7 +47,7 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction
             target = null;
             agent.SetDestination(transform.position);
 
-            if(Time.time > stunOutAt)
+            if (Time.time > stunOutAt)
             {
                 stun = false;
                 stunOutAt = 0;
@@ -56,63 +60,55 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction
         Vector3 targetDirection;
         if (target != null)
         {
-            float distance = Vector3.Distance(this.gameObject.transform.position, target.position);
-
-            if (distance > 3)
+            Vector3 dir = (target.position - transform.position).normalized;
+           
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, dir, out hit, castRange, mask))
             {
-                nextAttackAt = 0;
-                attacking = false;
-
-                if(!stun)
-                    anim.SetBool("walk", true);
+                Debug.Log(hit.collider.name);
+                if(hit.collider.CompareTag("Player"))
+                {
+                    agent.speed = 0;
+                    ableToAtt = true;
+                    //anim.SetBool("move", false);
+                }
                 else
-                    anim.SetBool("walk", false);
+                {
+                    agent.speed = 6;
+                    ableToAtt = false;
+                    //anim.SetBool("move", true);
+                }
             }
-            else
+
+            if(ableToAtt && Time.time > nextAttackAt && !attacking)
             {
-                anim.SetBool("walk", false);
-
-                if(Time.time > nextAttackAt && !attacking)
-                {
-                    StartCoroutine(MakeAttack());
-                }
+                StartCoroutine(MakeAttack());
             }
-        
-                targetDirection = (agent.steeringTarget - transform.position).normalized;
 
-                if (targetDirection != Vector3.zero)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
-                }
-            
+            targetDirection = (agent.steeringTarget - transform.position).normalized;
+
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
+            }
         }
-
-
     }
 
     private IEnumerator MakeAttack()
     {
         attacking = true;
-        anim.Play("attack");
-        yield return new WaitForSeconds(1f);
         nextAttackAt = Time.time + attackCooldown;
+        yield return new WaitForSeconds(0.1f);
+        anim.Play("attack");
 
-        //zadaj dmg
-        if (!stun)
-        {
-            if (Vector3.Distance(transform.position, target.position) < attackRange)
-            {
-                GiveDamage();
-            }
-        }
         attacking = false;
     }
 
     public void GiveDamage()
     {
         target.GetComponent<Hp>().DamagePlayer(1);
-	}
+    }
 
     public void StunEnemy()
     {

@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class culdronManager : MonoBehaviour, IknifeInteraction
+public class culdronManager : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField] private float startSpawnCooldown = 5;
     [SerializeField] private float middleSpawnCooldown = 5;
     [SerializeField] private int minEnemies = 3;
-    [SerializeField] private float freezeTime = 10;
-    [SerializeField] private int shootsToFreeze = 3;
     [SerializeField] private int MinEnemiesToSpawn = 2;
     [SerializeField] private int MaxEnemiesToSpawn = 3;
 
@@ -21,11 +19,6 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
 
     private List<GameObject> currentEnemiesObjects = new List<GameObject>();
     private int enemyCount = 0;
-    private int shootCounter = 0;
-    private float timeToRestart = 3;
-    private float restartIn = 0;
-    private bool freeze = false;
-    private float unfreeze = 0;
     private bool canSpawn = false;
 
 
@@ -38,40 +31,9 @@ public class culdronManager : MonoBehaviour, IknifeInteraction
     }
 
 
-    public void knifeInteract()
-    {
-        if (!freeze)
-        {
-            restartIn = Time.time + timeToRestart;
-            shootCounter++;
-            Debug.Log("count: " + shootCounter);
-        }
-    }
-
     private void Update()
     {
-        //zamra¿anie
-        if(Time.time > restartIn && shootCounter > 0)
-        {
-            shootCounter = 0;
-        }
-
-        if(shootCounter > shootsToFreeze && !freeze)
-        {
-            shootCounter = 0;
-            freeze = true;
-            canSpawn = false;
-            unfreeze = Time.time + freezeTime;
-            StartCoroutine(SpawnEnemies(Random.Range(MinEnemiesToSpawn, MaxEnemiesToSpawn)));
-        }
-
-        if(Time.time > unfreeze && freeze)
-        {
-            shootCounter = 0;
-            freeze = false;
-        }
-
-        if(canSpawn && !freeze)
+        if(canSpawn)
         {
             canSpawn = false;
             StartCoroutine(SpawnEnemies(Random.Range(MinEnemiesToSpawn, MaxEnemiesToSpawn)));
