@@ -7,7 +7,7 @@ public class ItemManager : MonoBehaviour
     [Header("Item Info")]
     [SerializeField] private ItemScriptableObject item;
     private InventoryManager inv_manager;
-
+    public bool throwed = false;
     private void Awake()
     {
         inv_manager = GameObject.FindGameObjectWithTag("inv").GetComponent<InventoryManager>();
@@ -57,15 +57,16 @@ public class ItemManager : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-       /* if (other != null)
+        if (other != null && throwed && item.stunTime > 0)
         {
             IitemInteraction interaction = other.collider.GetComponent<IitemInteraction>();
-
+            
             if (interaction != null)
             {
                 interaction.itemInteract(item.stunTime);
-                Destroy(gameObject);
+                throwed = false;
             }
-        }*/
+        }
+        throwed = false;
     }
 }

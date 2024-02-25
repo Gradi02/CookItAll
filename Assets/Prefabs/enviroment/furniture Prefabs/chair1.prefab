@@ -78,10 +78,55 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8553417584757162366, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6010214945015627077, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5896588202177574662, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9d25540308b89dc469ea8b6bb7b6246a,
         type: 3}
       propertyPath: m_Name
       value: chair1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_TagString
+      value: item
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333702947268403589, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852271838163675352, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293978542976095606, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512687335075297100, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91,6 +136,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5352378828608343798}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5978902354003578953}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d25540308b89dc469ea8b6bb7b6246a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7678321673932459943}
   m_SourcePrefab: {fileID: 100100000, guid: 9d25540308b89dc469ea8b6bb7b6246a, type: 3}
 --- !u!1 &5871072401245140800 stripped
 GameObject:
@@ -117,5 +170,46 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.12, y: 2.55, z: 1.24}
-  m_Center: {x: 0, y: 1.22, z: 0}
+  m_Size: {x: 1.12, y: 1.98, z: 1.24}
+  m_Center: {x: 0, y: 1.02, z: 0}
+--- !u!114 &5978902354003578953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871072401245140800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa36d474dd730b45986b0984e418f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 67d758e0cef2c3048b6154589752eb63, type: 2}
+  throwed: 0
+--- !u!54 &7678321673932459943
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5871072401245140800}
+  serializedVersion: 4
+  m_Mass: 3
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

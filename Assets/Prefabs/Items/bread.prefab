@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 28870f520a318b04794e3fe3ccd139f1, type: 2}
+  throwed: 0
 --- !u!65 &7369666239053697863
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -175,5 +176,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.1, z: 0.45}
+  m_Size: {x: 0.4, y: 0.06, z: 0.45}
   m_Center: {x: -0.1, y: 0, z: 0}

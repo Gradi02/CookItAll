@@ -14,12 +14,14 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     private bool attacking = false;
     private bool stun = false;
     private float stunOutAt = 0;
-    private float stunTime = 1;
+    //private float stunTime = 1;
     [SerializeField] private ParticleSystem stunParticle;
+    private float normalSpeed;
 
     private void Start()
     {
         agent.updateRotation = true;
+        normalSpeed = agent.speed;
     }
 
     void FixedUpdate()
@@ -40,11 +42,13 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
         }
         else
         {
-            target = null;
-            agent.SetDestination(transform.position);
+            //target = null;
+            //agent.SetDestination(transform.position);
+            agent.speed = 0;
 
             if(Time.time > stunOutAt)
             {
+                agent.speed = normalSpeed;
                 stun = false;
                 stunOutAt = 0;
             }
@@ -78,13 +82,13 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
                 }
             }
         
-                targetDirection = (agent.steeringTarget - transform.position).normalized;
+            targetDirection = (agent.steeringTarget - transform.position).normalized;
 
-                if (targetDirection != Vector3.zero)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
-                }
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
+            }
             
         }
 
@@ -116,9 +120,16 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
 
     public void StunEnemy(float stunTimeIn)
     {
-        stun = true;
-        stunParticle.Play();
-        stunOutAt = Time.time + stunTimeIn;
+        if (!stun)
+        {
+            stun = true;
+
+            ParticleSystem.MainModule main = stunParticle.main;
+            main.duration = stunTimeIn;
+
+            stunParticle.Play();
+            stunOutAt = Time.time + stunTimeIn;
+        }
     }
 
 

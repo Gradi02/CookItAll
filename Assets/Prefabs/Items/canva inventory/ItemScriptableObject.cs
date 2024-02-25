@@ -11,6 +11,7 @@ public class ItemScriptableObject : ScriptableObject
 
 
     public bool cookable;
+    public bool isFinalDish;
     public bool stackable;
     public float stunTime;
 }
