@@ -39,6 +39,7 @@ public class ItemThrow : MonoBehaviour
             item = Instantiate(selectedItem.item_model, transform.position, Quaternion.identity, itemTransform);
             item.GetComponent<BoxCollider>().enabled = false;
             item.GetComponent<Rigidbody>().useGravity = false;
+            item.GetComponent<Rigidbody>().freezeRotation = true;
         }
         else if(selectedItem == null && item != null)
         {
@@ -58,6 +59,7 @@ public class ItemThrow : MonoBehaviour
             {
                 item.GetComponent<BoxCollider>().enabled = true;
                 item.GetComponent<Rigidbody>().useGravity = true;
+                item.GetComponent<Rigidbody>().freezeRotation = false;
                 item.transform.parent = itemHolder;
                 item.GetComponent<ItemManager>().throwed = true;
 

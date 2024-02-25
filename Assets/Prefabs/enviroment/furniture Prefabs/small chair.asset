@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a64cb76621b1ba4e9e3061c5c856b98, type: 3}
-  m_Name: potatocakes
+  m_Name: small chair
   m_EditorClassIdentifier: 
-  item_name: potato cakes
-  item_image: {fileID: 21300000, guid: e1cbaf73a5b719447b6f7243774f5a21, type: 3}
-  item_model: {fileID: 1152968703690643404, guid: cd3b870b077a5e049bf455a23e331460,
+  item_name: small chair
+  item_image: {fileID: 21300000, guid: c4c548a339b4d41a590928c0c98934a7, type: 3}
+  item_model: {fileID: 1257933309303219325, guid: 279b117b3f610a84e95d54b85cf54574,
     type: 3}
   cookable: 0
-  isFinalDish: 1
+  isFinalDish: 0
   stackable: 0
-  stunTime: 1
+  stunTime: 4

@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -5113102266869827264, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4608865151334081388, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
       propertyPath: m_Layer
@@ -92,6 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -606857966815347593, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 162140748110543254, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
         type: 3}
@@ -143,6 +153,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 38f4c4e6b8b22e0458441013622c6d35, type: 2}
+    - target: {fileID: 8437353907192578877, guid: ca92da2c1ac603d4dbb5a7e3435562cb,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -206,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 919021a805ca3ea419a28523bc913c71, type: 2}
+  throwed: 0
 --- !u!65 &2795337907415149086
 BoxCollider:
   m_ObjectHideFlags: 0

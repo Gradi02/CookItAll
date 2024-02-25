@@ -15,18 +15,22 @@ public class FinishTask : MonoBehaviour
 	{
 		if (other.CompareTag("item") && tasks.TaskList.Count > 0)
 		{
-			for(int i=0; i<tasks.TaskList.Count; i++)
+			ItemManager itemManager = other.GetComponent<ItemManager>();
+			if (itemManager != null && itemManager.GetItem().isFinalDish)
 			{
-				if (other.GetComponent<ItemManager>().GetItemName() == tasks.TaskList[i].recipe.product.GetComponent<ItemManager>().GetItemName())
+				for (int i = 0; i < tasks.TaskList.Count; i++)
 				{
-					tasks.GetComponent<ScoreManager>().AddScore(tasks.TaskList[i].recipe.score);
-					FinishedTasks++;
-					tasks.DestroyTask(tasks.TaskList[i]);
-					GameObject p = Instantiate(pariclePrefab, transform.position, Quaternion.identity);
-					p.transform.position = other.transform.position;
-					Destroy(p, 5);
-					Destroy(other);
-					return;
+					if (itemManager.GetItemName() == tasks.TaskList[i].recipe.product.GetComponent<ItemManager>().GetItemName())
+					{
+						tasks.GetComponent<ScoreManager>().AddScore(tasks.TaskList[i].recipe.score);
+						FinishedTasks++;
+						tasks.DestroyTask(tasks.TaskList[i]);
+						GameObject p = Instantiate(pariclePrefab, transform.position, Quaternion.identity);
+						p.transform.position = other.transform.position;
+						Destroy(p, 5);
+						Destroy(other);
+						return;
+					}
 				}
 			}
 		}
