@@ -69,9 +69,9 @@ public class EnemyInfo : MonoBehaviour
     //Funkcja niszcz¹ca obiekt przeciwnika
     private void DestroyEnemy()
     {
-        culdronManager.RemoveEnemyFromList(gameObject);
-        //GameObject b = Instantiate(blood, transform.position + transform.forward + new Vector3(0, 2, 0), Quaternion.identity);
-        //Destroy(b, 3);
+        if(culdronManager != null)
+            culdronManager.RemoveEnemyFromList(gameObject);
+
         Vector3 offset = blood.transform.localPosition;
         blood.transform.parent = null;
         blood.transform.localScale = new Vector3(1, 1, 1);

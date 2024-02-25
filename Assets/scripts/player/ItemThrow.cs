@@ -59,6 +59,7 @@ public class ItemThrow : MonoBehaviour
                 item.GetComponent<BoxCollider>().enabled = true;
                 item.GetComponent<Rigidbody>().useGravity = true;
                 item.transform.parent = itemHolder;
+                item.GetComponent<ItemManager>().throwed = true;
 
                 Vector3 pos = Camera.main.transform.forward;
                 item.GetComponent<Rigidbody>().AddForce(pos * power, ForceMode.Impulse);
