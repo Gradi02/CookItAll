@@ -1,76 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
 
-	private float moveSpeed = 5f;		
-	//private float maxSpeed = 7.5f;	
-	private float drag = 5f;			 
-	private float jumpforce = 0.5f;		 	
-	public Transform orientation;
-	Vector3 moveDIrection;
+	public float moveSpeed = 5f;
+	public float jumpForce = 4f;
+	private bool left = false;
+	private Rigidbody rb;
 
-	float HorizontalInput;
-	float VerticalInput;
-	Rigidbody rb;
+	private bool Grounded = true;
 
-	private void Start()
+	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		rb.freezeRotation = true;
 	}
+
+	void FixedUpdate()
+	{
+		float horizontalInput = Input.GetAxis("Horizontal");
+		float verticalInput = Input.GetAxis("Vertical");
+
+		Vector3 camForward = Camera.main.transform.forward;
+		Vector3 camRight = Camera.main.transform.right;
+
+		camForward.y = 0;
+		camRight.y = 0;
+
+		camForward.Normalize();
+		camRight.Normalize();
+
+		Vector3 movement = (camForward * verticalInput + camRight * horizontalInput) * moveSpeed * Time.deltaTime;
+
+		rb.MovePosition(transform.position + movement);
+	}
+
 	private void Update()
-    {
-		KeyInput();
-
-		if (Input.GetKey(KeyCode.Space) && IsGrounded())
+	{
+		if (Input.GetKeyDown(KeyCode.Space) && Grounded)
 		{
-			Jump();
-		}
-
-		if (!IsGrounded())
-		{
-			moveSpeed = 3;
-			rb.AddForce(Vector3.down * -9.81f * Time.deltaTime);
-		}
-		else
-		{
-			moveSpeed = 5;
+			Grounded = false;
+			rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+			StartCoroutine(Cooldown());
 		}
 	}
-	
-	private void KeyInput()
+	private IEnumerator Cooldown()
 	{
-		//sprawdzamy co klikamy itd.
-		HorizontalInput = Input.GetAxisRaw("Horizontal");
-		VerticalInput = Input.GetAxisRaw("Vertical");
-	}
-
-	private void FixedUpdate()
-	{
-		//wykonujemy poruszanie i nadajemy DRAG aby zapobiec slizganiu sie postaci
-		MovePlayer();
-		rb.drag = drag;
-	}
-
-	private void MovePlayer()
-	{
-		moveDIrection = orientation.forward * VerticalInput + orientation.right * HorizontalInput;
-		rb.AddForce(moveDIrection.normalized * moveSpeed * 10f, ForceMode.Force);
-	}
-	private void Jump()
-	{
-		if (IsGrounded())
-		{
-			rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-		}
-	}
-	private bool IsGrounded()
-	{
-		// SprawdŸ, czy postaæ jest na ziemi (na podstawie niewielkiego przesuniêcia od dolnej krawêdzi collidera)
-		float distanceToGround = GetComponent<Collider>().bounds.extents.y;
-		return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
+		yield return new WaitForSeconds(0.7f);
+		Grounded = true;
 	}
 }
