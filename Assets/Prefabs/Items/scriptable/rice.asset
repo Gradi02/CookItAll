@@ -16,3 +16,6 @@ MonoBehaviour:
   item_image: {fileID: 21300000, guid: 6d1da642247dfbe44bb3b76ce64eab3f, type: 3}
   item_model: {fileID: 1802182847973668214, guid: 557d8dc1f9df24d4e94d7b779e6bb739,
     type: 3}
+  cookable: 1
+  stackable: 1
+  stunTime: 0
