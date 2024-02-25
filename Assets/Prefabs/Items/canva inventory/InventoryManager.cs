@@ -21,14 +21,14 @@ public class InventoryManager : MonoBehaviour
     //Funkcja ¿e przedmiot zosta³ podniesiony
     public bool PickUpItem(ItemScriptableObject item)
     {
-        if(CheckIfSlotExist(item))
+        if(item.stackable && CheckIfSlotExist(item))
         {
             tempSlot.AddItem();
-            return true;
+            return true;     
         }
         else
         {
-            if (slots.Count < 5)
+            if (slots.Count < 7)
             {
                 GameObject new_slot = Instantiate(slotPrefab, transform.position, Quaternion.identity, transform);
                 new_slot.GetComponent<ItemSlotManager>().SetItem(item);

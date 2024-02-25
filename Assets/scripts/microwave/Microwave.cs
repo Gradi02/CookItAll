@@ -48,12 +48,13 @@ public class Microwave : MonoBehaviour, IknifeInteraction
     private void OnTriggerEnter(Collider item)
 	{
 		// Sprawdzamy, czy obiekt, który wszed³ w obszar wyzwalacza, ma tag "Player".
-		if (item.CompareTag("item") && usable == true)
+		if (item.CompareTag("item") && usable == true && ItemsList.Count < 10)
 		{
-			if (ItemsList.Count < 10)
+			ItemManager itemManager = item.GetComponent<ItemManager>();
+			if (itemManager != null && itemManager.GetItem().cookable)
 			{
 				gameObject.GetComponent<Animator>().Play("microwave_product");
-				ItemScriptableObject itm = item.GetComponent<ItemManager>().GetItem();
+				ItemScriptableObject itm = itemManager.GetItem();
 				ItemsList.Add(itm);
 
 				GameObject i = Instantiate(imagePref, transform.position, Quaternion.identity, grid);

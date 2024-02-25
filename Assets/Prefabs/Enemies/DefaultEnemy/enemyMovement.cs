@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour, IknifeInteraction
+public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
 {
     private Transform target;
     [SerializeField] private NavMeshAgent agent;
@@ -114,11 +114,11 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction
         target.GetComponent<Hp>().DamagePlayer(1);
 	}
 
-    public void StunEnemy()
+    public void StunEnemy(float stunTimeIn)
     {
         stun = true;
         stunParticle.Play();
-        stunOutAt = Time.time + stunTime;
+        stunOutAt = Time.time + stunTimeIn;
     }
 
 
@@ -126,7 +126,11 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction
     public void knifeInteract()
     {
         GetComponent<EnemyInfo>().DamageEnemy(GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>().knifeDamage);
+    }
 
-        StunEnemy();
+    public void itemInteract(float stunTimeIn)
+    {
+        GetComponent<EnemyInfo>().DamageEnemy(2);
+        StunEnemy(stunTimeIn);
     }
 }

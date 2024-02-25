@@ -8,3 +8,9 @@ public interface IknifeInteraction
     void knifeInteract();
 }
 
+
+public interface IitemInteraction
+{
+    void itemInteract(float stunTime);
+}
+

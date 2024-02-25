@@ -50,7 +50,22 @@ public class ItemManager : MonoBehaviour
     }
 
     public ItemScriptableObject GetItem()
-     {
+    {
         return item;
-     }
- }
+    }
+
+
+    public void OnCollisionEnter(Collision other)
+    {
+       /* if (other != null)
+        {
+            IitemInteraction interaction = other.collider.GetComponent<IitemInteraction>();
+
+            if (interaction != null)
+            {
+                interaction.itemInteract(item.stunTime);
+                Destroy(gameObject);
+            }
+        }*/
+    }
+}
