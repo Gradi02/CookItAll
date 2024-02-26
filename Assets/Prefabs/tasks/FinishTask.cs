@@ -13,10 +13,10 @@ public class FinishTask : MonoBehaviour
 	public int BadTasks = 0;
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("item") && tasks.TaskList.Count > 0)
+		if (other.CompareTag("item"))
 		{
 			ItemManager itemManager = other.GetComponent<ItemManager>();
-			if (itemManager != null && itemManager.GetItem().isFinalDish)
+			if (itemManager != null && itemManager.GetItem().isFinalDish && tasks.TaskList.Count > 0)
 			{
 				for (int i = 0; i < tasks.TaskList.Count; i++)
 				{
@@ -33,6 +33,10 @@ public class FinishTask : MonoBehaviour
 					}
 				}
 			}
+			else
+            {
+				return;
+            }
 		}
 
 		//gdy coœ nie tak
