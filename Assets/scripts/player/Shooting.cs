@@ -19,12 +19,13 @@ public class Shooting : MonoBehaviour
 	public Transform handTransform;
 	private GameObject knife = null;
 	private float nextShoot = 0;
-	private float shotCol = 0.5f;
+	private float shotCol = 0.3f;
 	public float knifeDamage = 6;
 
 	//REKA
 	private bool handSelected = true;
 	public GameObject hand;
+	public GameObject handPivot;
 
 
 	//AMMO
@@ -85,8 +86,7 @@ public class Shooting : MonoBehaviour
 				{
 					nextShoot = Time.time + shotCol;
 					ammo--;
-
-					knife.transform.parent = null;
+                    knife.transform.parent = null;
 					knife.GetComponent<Rigidbody>().useGravity = true;
 					knife.GetComponent<BoxCollider>().enabled = true;
 					knife.GetComponent<knifeManager>().enabled = true;
