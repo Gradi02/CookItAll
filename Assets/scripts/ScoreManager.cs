@@ -59,7 +59,7 @@ public class ScoreManager : MonoBehaviour
 
 	private void Awake()
     {
-        levelLength = levelLengthInSecond + levelLengthInMinutes * 60;
+        levelLength = Time.time + levelLengthInSecond + levelLengthInMinutes * 60;
         tasks = GetComponent<Tasks>();
     }
 
@@ -195,7 +195,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Summary()
     {
-		PlayerPrefs.DeleteAll();    //DO WYJEBANIA
+		//PlayerPrefs.DeleteAll();    //DO WYJEBANIA
 		if (PlayerPrefs.HasKey("Level1Stars"))
         {
             int stars = PlayerPrefs.GetInt("Level1Stars");
@@ -206,7 +206,6 @@ public class ScoreManager : MonoBehaviour
 				if (!checkStar3 && stars < 3) PlayerPrefs.SetInt("Level1Stars", 3);
 			}
         }
-
         else
         {
 			PlayerPrefs.SetInt("Level1Stars",0);
@@ -214,5 +213,10 @@ public class ScoreManager : MonoBehaviour
 			if (!checkStar2) PlayerPrefs.SetInt("Level1Stars", 2);
 			if (!checkStar3) PlayerPrefs.SetInt("Level1Stars", 3);
 		}
+
+        if(currentScore > PlayerPrefs.GetFloat("HS_1"))
+        {
+            PlayerPrefs.SetFloat("HS_1", currentScore);
+        }
     }
 }

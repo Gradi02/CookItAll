@@ -20,13 +20,14 @@ public class Tasks : MonoBehaviour
 
 	private void Start()
 	{
+		levelEnd = false;
 		StartCoroutine(TaskLoop());
 	}
 	private IEnumerator TaskLoop()
 	{
 		//first task - game start
 		yield return new WaitForSeconds(1f);
-		GiveTask();
+		StartCoroutine(GiveTask());
 
 
 		//loop

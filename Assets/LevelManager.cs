@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject star2;
 	public GameObject star3;
 
+	public TextMeshProUGUI hs;
 
 	private void Start()
 	{
@@ -21,12 +23,17 @@ public class LevelManager : MonoBehaviour
 			if (stars == 2) star2.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 			if (stars == 3) star3.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 		}
-
 		else
 		{
 			star1.GetComponent<Image>().color = new Color(128, 128, 128, 0.3f);
 			star2.GetComponent<Image>().color = new Color(128, 128, 128, 0.3f);
 			star3.GetComponent<Image>().color = new Color(128, 128, 128, 0.3f);
 		}
+
+		if(!PlayerPrefs.HasKey("HS_1"))
+        {
+			PlayerPrefs.SetFloat("HS_1", 0);
+        }
+		hs.text = "HIGHSCORE: " + PlayerPrefs.GetFloat("HS_1");
 	}
 }
