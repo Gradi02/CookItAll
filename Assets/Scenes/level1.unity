@@ -3745,7 +3745,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 428341243}
+  - {fileID: 1847842997}
   - {fileID: 1445852244}
   - {fileID: 1069419363}
   m_Father: {fileID: 902716627}
@@ -4293,12 +4293,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428341242}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2618601, y: -0.008022125, z: -0.11476572, w: 0.95822424}
-  m_LocalPosition: {x: 0.5, y: -0.5, z: 0.75}
-  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
+  m_LocalRotation: {x: -0.000000029802319, y: 0.00000015972181, z: -0.000000009080394,
+    w: 1}
+  m_LocalPosition: {x: -0.0031467974, y: 0.4173237, z: -0.00039330125}
+  m_LocalScale: {x: 0.20000005, y: 1, z: 0.19999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 330585546}
+  m_Father: {fileID: 1847842997}
   m_LocalEulerAnglesHint: {x: 30, y: -5, z: -15}
 --- !u!23 &428341245
 MeshRenderer:
@@ -9199,6 +9200,7 @@ MonoBehaviour:
   handTransform: {fileID: 1069419363}
   knifeDamage: 6
   hand: {fileID: 428341242}
+  handPivot: {fileID: 1847842996}
   ammotxt: {fileID: 868542826}
   ammoWarning: {fileID: 2091670211}
   ammoSlider: {fileID: 1117808591}
@@ -19398,6 +19400,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831170064}
   m_CullTransparentMesh: 1
+--- !u!1 &1847842996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1847842997}
+  m_Layer: 0
+  m_Name: pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1847842997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847842996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.26186007, y: -0.008022226, z: -0.114765756, w: 0.9582243}
+  m_LocalPosition: {x: 0.413, y: -0.85, z: 0.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 428341243}
+  m_Father: {fileID: 330585546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849697874
 PrefabInstance:
   m_ObjectHideFlags: 0
