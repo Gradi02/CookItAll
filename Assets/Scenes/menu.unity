@@ -2503,6 +2503,7 @@ MonoBehaviour:
   star1: {fileID: 762533482}
   star2: {fileID: 1590027636}
   star3: {fileID: 903986444}
+  hs: {fileID: 360088154}
 --- !u!1 &109752141
 GameObject:
   m_ObjectHideFlags: 0

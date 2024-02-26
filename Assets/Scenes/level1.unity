@@ -11589,8 +11589,8 @@ MonoBehaviour:
   starScore1: 150
   starScore2: 300
   starScore3: 450
-  levelLengthInMinutes: 5
-  levelLengthInSecond: 30
+  levelLengthInMinutes: 1
+  levelLengthInSecond: 10
   ScoreText: {fileID: 318256298}
 --- !u!114 &1113836274
 MonoBehaviour:
