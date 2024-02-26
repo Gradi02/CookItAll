@@ -118,10 +118,10 @@ public class Shooting : MonoBehaviour
 	{
 		ammoSlider.gameObject.SetActive(true);
 		IsReloading = true;
-		ammoSlider.value = 0;
 		ammoSlider.maxValue = Maxammo;
+		ammoSlider.value = ammo;
 
-		for (int i = 0; i < Maxammo; i++)
+		for (int i = ammo; i < Maxammo; i++)
 		{
 			yield return new WaitForSeconds(0.3f);
 			ammoSlider.value += 1;

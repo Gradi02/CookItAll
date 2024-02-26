@@ -57,16 +57,18 @@ public class ItemManager : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other != null && throwed && item.stunTime > 0)
+        if (other != null && item.stunTime > 0 && GetComponent<Rigidbody>().velocity.magnitude > 2 && throwed)
         {
             IitemInteraction interaction = other.collider.GetComponent<IitemInteraction>();
-            
+
             if (interaction != null)
             {
                 interaction.itemInteract(item.stunTime);
-                throwed = false;
             }
         }
-        throwed = false;
+        else
+        {
+            throwed = false;
+        }
     }
 }
