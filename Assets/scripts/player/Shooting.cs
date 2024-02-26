@@ -86,6 +86,9 @@ public class Shooting : MonoBehaviour
 				{
 					nextShoot = Time.time + shotCol;
 					ammo--;
+					//
+					LeanTween.rotateAround(handPivot, new Vector3(0, 0, 1), 360, shotCol);
+					//
                     knife.transform.parent = null;
 					knife.GetComponent<Rigidbody>().useGravity = true;
 					knife.GetComponent<BoxCollider>().enabled = true;
