@@ -71,11 +71,13 @@ public class Microwave : MonoBehaviour, IknifeInteraction
 		usable = false;
 		gameObject.GetComponent<Animator>().SetBool("cooking", true);
 		PS.gameObject.SetActive(true);
+		FindAnyObjectByType<AudioManager>().Play("microwave_cook");
 		yield return new WaitForSeconds(5f);
 		PS.gameObject.SetActive(false);
 		gameObject.GetComponent<Animator>().SetBool("cooking", false);
 		ready = Instantiate(product, dish.position, Quaternion.identity);
 		ItemsList.Clear();
+		FindAnyObjectByType<AudioManager>().Stop("microwave_cook");
 		DestroyCanvaItems();
 		itemsImages.Clear();
 		gameObject.GetComponent<Animator>().Play("microwave_open");

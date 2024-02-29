@@ -96,6 +96,8 @@ public class Shooting : MonoBehaviour
 					knife.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * shootSpeed, ForceMode.Impulse);
 					currentWeapon = null;
 					knife = null;
+
+					FindAnyObjectByType<AudioManager>().Play("siu");
 				}
 			}
 
