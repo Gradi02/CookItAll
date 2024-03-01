@@ -181,3 +181,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d25e6d761335a64196b664364f00185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particlesPref: {fileID: 8717033686332981599, guid: a60cf4ce998661044b5bf744d0b49e51,
+    type: 3}

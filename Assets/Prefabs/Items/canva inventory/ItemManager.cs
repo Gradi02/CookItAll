@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -8,9 +9,22 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ItemScriptableObject item;
     private InventoryManager inv_manager;
     public bool throwed = false;
+    private NavMeshObstacle obstacle;
+    private Rigidbody rb;
+
     private void Awake()
     {
         inv_manager = GameObject.FindGameObjectWithTag("inv").GetComponent<InventoryManager>();
+
+        if(GetComponent<NavMeshObstacle>() != null)
+        {
+            obstacle = GetComponent<NavMeshObstacle>();
+        }
+
+        if(GetComponent<Rigidbody>() != null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
     }
 
 
@@ -57,7 +71,7 @@ public class ItemManager : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other != null && item.stunTime > 0 && GetComponent<Rigidbody>().velocity.magnitude > 2 && throwed)
+        if (other != null && item.stunTime > 0 && rb.velocity.magnitude > 2 && throwed)
         {
             IitemInteraction interaction = other.collider.GetComponent<IitemInteraction>();
 
@@ -69,6 +83,21 @@ public class ItemManager : MonoBehaviour
         else
         {
             throwed = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (obstacle != null)
+        {
+            if (rb.velocity.magnitude < 1)
+            {
+                obstacle.enabled = true;
+            }
+            else
+            {
+                obstacle.enabled = false;
+            }
         }
     }
 }
