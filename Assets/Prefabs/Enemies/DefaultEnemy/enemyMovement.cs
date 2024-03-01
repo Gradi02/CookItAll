@@ -14,14 +14,20 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     private bool attacking = false;
     private bool stun = false;
     private float stunOutAt = 0;
-    //private float stunTime = 1;
     [SerializeField] private ParticleSystem stunParticle;
     private float normalSpeed;
 
     private void Start()
     {
         agent.updateRotation = true;
-        normalSpeed = agent.speed;
+    }
+
+    public void SetCustomData(float speed, float health)
+    {
+        normalSpeed = speed;
+        agent.speed = normalSpeed;
+
+        GetComponent<EnemyInfo>().SetHealth(health);
     }
 
     void FixedUpdate()
@@ -124,6 +130,7 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
         {
             stun = true;
 
+            stunParticle.Stop();
             ParticleSystem.MainModule main = stunParticle.main;
             main.duration = stunTimeIn;
 

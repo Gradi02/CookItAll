@@ -15,6 +15,7 @@ TagManager:
   - options
   - authors
   - exit
+  - enemy
   layers:
   - Default
   - TransparentFX

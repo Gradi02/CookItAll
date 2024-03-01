@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyInfo : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class EnemyInfo : MonoBehaviour
     private culdronManager culdronManager;
     [SerializeField] private Rigidbody rb;
     public ParticleSystem blood;
-
+    public Slider hpSlider;
 
 
 
@@ -25,8 +27,18 @@ public class EnemyInfo : MonoBehaviour
     public void Awake()
     {
         ItemsHolder = GameObject.FindGameObjectWithTag("ItemsHolder").transform;
+        hpSlider.transform.parent.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
+    private void Update()
+    {
+        hpSlider.value = health;
+
+        Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        hpSlider.transform.parent.rotation = rotation;
+    }
 
     ///////////////////////////////////////////////////////////////////////
 
@@ -93,5 +105,14 @@ public class EnemyInfo : MonoBehaviour
             item.GetComponent<Rigidbody>().AddForce(3*transform.up, ForceMode.Impulse);
             item.GetComponent<Rigidbody>().AddTorque(0.3f * transform.right + 0.2f * transform.forward, ForceMode.Impulse);
         }
+    }
+
+
+
+
+    public void SetHealth(float hpin)
+    {
+        health = hpin;
+        hpSlider.maxValue = hpin;
     }
 }
