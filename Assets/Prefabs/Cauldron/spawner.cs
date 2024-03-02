@@ -10,8 +10,9 @@ public class spawner : MonoBehaviour
     public GameObject particlesPref;
     private GameObject particles;
 
-    private float minimumSize = 1.5f;
-    private float maximumSize = 2.5f;
+    //potato
+    private float potatoMinimumSize = 1.5f;
+    private float potatoMaximumSize = 2.5f;
 
     private void Awake()
     {
@@ -42,8 +43,9 @@ public class spawner : MonoBehaviour
     private void CustomizeEnemy(GameObject e)
     {
         EnemyMovement mvm = e.GetComponentInChildren<EnemyMovement>();
+        EnemyInfo inf = e.GetComponentInChildren<EnemyInfo>();
 
-        float rand = Random.Range(minimumSize, maximumSize);
+        float rand = Random.Range(inf.minimumSize, inf.maximumSize);
         Vector3 randomSize = new Vector3(rand, rand, rand);
         e.transform.localScale = randomSize;
 

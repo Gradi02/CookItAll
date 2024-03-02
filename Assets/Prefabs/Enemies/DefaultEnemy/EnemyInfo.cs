@@ -8,6 +8,8 @@ public class EnemyInfo : MonoBehaviour
 {
     [Header("Basic Info")]
     [SerializeField] private float health = 20;
+    public float minimumSize = 1f;
+    public float maximumSize = 2f;
 
     [Header("Drop Info")]
     [SerializeField] private GameObject lootTableItem;

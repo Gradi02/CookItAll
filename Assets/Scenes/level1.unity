@@ -23877,7 +23877,7 @@ PrefabInstance:
     - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}
       propertyPath: enemiesPrefabs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}

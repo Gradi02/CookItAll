@@ -73,14 +73,14 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
                 nextAttackAt = 0;
                 attacking = false;
 
-                if(!stun)
+                /*if(!stun)
                     anim.SetBool("walk", true);
                 else
-                    anim.SetBool("walk", false);
+                    anim.SetBool("walk", false);*/
             }
             else
             {
-                anim.SetBool("walk", false);
+               //anim.SetBool("walk", false);
 
                 if(Time.time > nextAttackAt && !attacking)
                 {
@@ -104,7 +104,7 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     private IEnumerator MakeAttack()
     {
         attacking = true;
-        anim.Play("attack");
+        //anim.Play("attack");
         yield return new WaitForSeconds(1f);
         nextAttackAt = Time.time + attackCooldown;
 

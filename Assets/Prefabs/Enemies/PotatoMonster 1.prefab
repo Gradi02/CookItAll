@@ -10172,6 +10172,16 @@ PrefabInstance:
       propertyPath: hpSlider
       value: 
       objectReference: {fileID: 3151840350673650828}
+    - target: {fileID: 3661519098781890229, guid: d436d3b7b5a54834482e7a51b464ae08,
+        type: 3}
+      propertyPath: maximumSize
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661519098781890229, guid: d436d3b7b5a54834482e7a51b464ae08,
+        type: 3}
+      propertyPath: minimumSize
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4007857267262706478, guid: d436d3b7b5a54834482e7a51b464ae08,
         type: 3}
       propertyPath: attackRange
