@@ -73,14 +73,14 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
                 nextAttackAt = 0;
                 attacking = false;
 
-                if(!stun)
+                /*if(!stun)
                     anim.SetBool("walk", true);
                 else
-                    anim.SetBool("walk", false);
+                    anim.SetBool("walk", false);*/
             }
             else
             {
-                anim.SetBool("walk", false);
+               //anim.SetBool("walk", false);
 
                 if(Time.time > nextAttackAt && !attacking)
                 {
@@ -104,7 +104,7 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     private IEnumerator MakeAttack()
     {
         attacking = true;
-        anim.Play("attack");
+        //anim.Play("attack");
         yield return new WaitForSeconds(1f);
         nextAttackAt = Time.time + attackCooldown;
 
@@ -132,9 +132,20 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
 
             stunParticle.Stop();
             ParticleSystem.MainModule main = stunParticle.main;
-            main.duration = stunTimeIn;
+
+            if(!stunParticle.isPlaying)
+                main.duration = stunTimeIn;
 
             stunParticle.Play();
+            stunOutAt = Time.time + stunTimeIn;
+        }
+    }
+
+    public void StunEnemyWithoutParticles(float stunTimeIn)
+    {
+        if (!stun)
+        {
+            stun = true;
             stunOutAt = Time.time + stunTimeIn;
         }
     }
@@ -144,6 +155,7 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     public void knifeInteract()
     {
         GetComponent<EnemyInfo>().DamageEnemy(GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>().knifeDamage);
+        StunEnemyWithoutParticles(0.3f);
     }
 
     public void itemInteract(float stunTimeIn)
