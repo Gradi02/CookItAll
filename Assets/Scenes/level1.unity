@@ -23877,13 +23877,13 @@ PrefabInstance:
     - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}
       propertyPath: enemiesPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}
       propertyPath: enemiesPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 3875582872547050347, guid: 13e5478f498d2de449d982fc0fbec156,
+      objectReference: {fileID: 5941937727295957456, guid: 1a51ec870b9523042aa7cd82842d4439,
         type: 3}
     - target: {fileID: 2413067103183118940, guid: bd2e77150afaf064e8fc5d6fa05dd286,
         type: 3}

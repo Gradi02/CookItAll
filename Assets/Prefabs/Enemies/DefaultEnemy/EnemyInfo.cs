@@ -20,9 +20,10 @@ public class EnemyInfo : MonoBehaviour
     private culdronManager culdronManager;
     [SerializeField] private Rigidbody rb;
     public ParticleSystem blood;
+    public ParticleSystem killed;
     public ParticleSystem hit;
-	public ParticleSystem killed;
 	public Slider hpSlider;
+    public Canvas canvas;
 
 
     /////////////////////////////////////////////////////////////////////
@@ -30,7 +31,7 @@ public class EnemyInfo : MonoBehaviour
     public void Awake()
     {
         ItemsHolder = GameObject.FindGameObjectWithTag("ItemsHolder").transform;
-        hpSlider.transform.parent.GetComponent<Canvas>().worldCamera = Camera.main;
+        canvas.worldCamera = Camera.main;
     }
 
     private void Update()
@@ -38,7 +39,7 @@ public class EnemyInfo : MonoBehaviour
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
-        hpSlider.transform.parent.rotation = rotation;
+        canvas.transform.rotation = rotation;
     }
 
     private void FixedUpdate()
@@ -100,12 +101,20 @@ public class EnemyInfo : MonoBehaviour
             culdronManager.RemoveEnemyFromList(gameObject);
 
         Vector3 offset = blood.transform.localPosition;
+
         blood.transform.parent = null;
         blood.transform.localScale = new Vector3(1, 1, 1);
         blood.transform.position = transform.position + offset;
         blood.Play();
         Destroy(blood.gameObject, 3);
-		Destroy(gameObject);
+
+        killed.transform.parent = null;
+        killed.transform.localScale = new Vector3(1, 1, 1);
+        killed.transform.position = transform.position + offset;
+        killed.Play();
+        Destroy(killed.gameObject, 3);
+
+        Destroy(gameObject);
     }
 
 
