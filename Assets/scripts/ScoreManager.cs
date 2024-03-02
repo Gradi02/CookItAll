@@ -195,25 +195,6 @@ public class ScoreManager : MonoBehaviour
 
     private void Summary()
     {
-		//PlayerPrefs.DeleteAll();    //DO WYJEBANIA
-		if (PlayerPrefs.HasKey("Level1Stars"))
-        {
-            int stars = PlayerPrefs.GetInt("Level1Stars");
-            if(stars<3)
-            {
-                if (!checkStar1 && stars<1) PlayerPrefs.SetInt("Level1Stars", 1);
-				if (!checkStar2 && stars < 2) PlayerPrefs.SetInt("Level1Stars", 2);
-				if (!checkStar3 && stars < 3) PlayerPrefs.SetInt("Level1Stars", 3);
-			}
-        }
-        else
-        {
-			PlayerPrefs.SetInt("Level1Stars",0);
-			if (!checkStar1) PlayerPrefs.SetInt("Level1Stars", 1);
-			if (!checkStar2) PlayerPrefs.SetInt("Level1Stars", 2);
-			if (!checkStar3) PlayerPrefs.SetInt("Level1Stars", 3);
-		}
-
         if(currentScore > PlayerPrefs.GetFloat("HS_1"))
         {
             PlayerPrefs.SetFloat("HS_1", currentScore);
