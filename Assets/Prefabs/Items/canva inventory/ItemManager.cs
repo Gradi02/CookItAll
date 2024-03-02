@@ -90,7 +90,7 @@ public class ItemManager : MonoBehaviour
     {
         if (obstacle != null)
         {
-            if (rb.velocity.magnitude < 1)
+            if (rb.velocity.magnitude == 0)
             {
                 obstacle.enabled = true;
             }

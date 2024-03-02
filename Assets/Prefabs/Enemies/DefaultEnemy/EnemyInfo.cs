@@ -18,8 +18,8 @@ public class EnemyInfo : MonoBehaviour
     private culdronManager culdronManager;
     [SerializeField] private Rigidbody rb;
     public ParticleSystem blood;
+    public ParticleSystem hit;
     public Slider hpSlider;
-
 
 
     /////////////////////////////////////////////////////////////////////
@@ -32,12 +32,23 @@ public class EnemyInfo : MonoBehaviour
 
     private void Update()
     {
-        hpSlider.value = health;
-
         Vector3 direction = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
 
         hpSlider.transform.parent.rotation = rotation;
+    }
+
+    private void FixedUpdate()
+    {
+        if (hpSlider.value > health)
+        {
+            hpSlider.value -= 0.5f;
+            hpSlider.transform.localEulerAngles = new Vector3(0, 0, Random.Range(-5.0f, 5.0f));
+        }
+        else
+        {
+            hpSlider.transform.localEulerAngles = Vector3.zero;
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -55,6 +66,7 @@ public class EnemyInfo : MonoBehaviour
             health = 0;
         }
 
+        hit.Play();
         CheckForDeath();
     }
 
@@ -108,11 +120,10 @@ public class EnemyInfo : MonoBehaviour
     }
 
 
-
-
     public void SetHealth(float hpin)
     {
-        health = hpin;
         hpSlider.maxValue = hpin;
+        health = hpin;
+        hpSlider.value = hpin;
     }
 }
