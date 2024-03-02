@@ -21,7 +21,8 @@ public class EnemyInfo : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     public ParticleSystem blood;
     public ParticleSystem hit;
-    public Slider hpSlider;
+	public ParticleSystem killed;
+	public Slider hpSlider;
 
 
     /////////////////////////////////////////////////////////////////////
@@ -104,7 +105,7 @@ public class EnemyInfo : MonoBehaviour
         blood.transform.position = transform.position + offset;
         blood.Play();
         Destroy(blood.gameObject, 3);
-        Destroy(gameObject);
+		Destroy(gameObject);
     }
 
 

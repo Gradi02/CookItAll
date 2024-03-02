@@ -18,12 +18,11 @@ public class UfoManager : MonoBehaviour
         StartCoroutine(UfoMovement(RandomTimeEvent));
 	}
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if(UfoPrefab.gameObject != null)
+        if(UfoPrefab != null)
         {
-            transform.position += new Vector3(0.1f, 0, 0.1f);
+            UfoPrefab.transform.position += new Vector3(0.1f, 0, 0.1f);
         }
     }
 
