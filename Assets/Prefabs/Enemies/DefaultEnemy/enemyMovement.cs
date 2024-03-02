@@ -73,38 +73,36 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
                 nextAttackAt = 0;
                 attacking = false;
 
-                /*if(!stun)
+                if(!stun)
                     anim.SetBool("walk", true);
                 else
-                    anim.SetBool("walk", false);*/
+                    anim.SetBool("walk", false);
             }
             else
             {
-               //anim.SetBool("walk", false);
+                anim.SetBool("walk", false);
 
                 if(Time.time > nextAttackAt && !attacking)
                 {
                     StartCoroutine(MakeAttack());
                 }
+                return;
             }
-        
+
             targetDirection = (agent.steeringTarget - transform.position).normalized;
 
             if (targetDirection != Vector3.zero)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(-targetDirection);
+                Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 360 * Time.deltaTime);
-            }
-            
+            }      
         }
-
-
     }
 
     private IEnumerator MakeAttack()
     {
         attacking = true;
-        //anim.Play("attack");
+        anim.Play("attack");
         yield return new WaitForSeconds(1f);
         nextAttackAt = Time.time + attackCooldown;
 
@@ -156,11 +154,13 @@ public class EnemyMovement : MonoBehaviour, IknifeInteraction, IitemInteraction
     {
         GetComponent<EnemyInfo>().DamageEnemy(GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>().knifeDamage);
         StunEnemyWithoutParticles(0.3f);
+        anim.Play("hit");
     }
 
     public void itemInteract(float stunTimeIn)
     {
         GetComponent<EnemyInfo>().DamageEnemy(2);
         StunEnemy(stunTimeIn);
+        anim.Play("hit");
     }
 }
